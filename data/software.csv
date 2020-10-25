@@ -1,7 +1,11 @@
-package,what,when,with,where,why, release
-"prettypublisher", "An R package that aims to improve your workflow by allowing an easier transition from literate code to a paper draft ready for journal submission", 2017, S Abbott, samabbott.co.uk/prettypublisher, Author and maintainer, GitHub
-"getTBinR", "Access and summarise World Health Organisation tuberculosis data",2018,S Abbott,samabbott.co.uk/getTBinR,Author and maintainer, CRAN
-"getTBinR", "Access and summarise World Health Organisation tuberculosis data",2018,S Abbott,samabbott.co.uk/getTBinR,Released to CRAN with 11k+ downloads, CRAN
-"idmodelr", "Infectious disease model library and utilities",2019,S Abbott,samabbott.co.uk/idmodelr,Author and maintainer, CRAN
-"idmodelr", "Infectious disease model library and utilities",2019,S Abbott,samabbott.co.uk/idmodelr,Released to CRAN with 1k+ downloads, CRAN
-"EstZoonoticTB", "An R package for exploring, visualising and estimating the global zoonotic tuberculosis burden", 2019, S Abbott, samabbott.co.uk/EstZoonoticTB, Author and maintainer, GitHub
+package,what,when,where
+OpenGWAS,The OpenGWAS data infrastructure,2019,https://gwas.mrcieu.ac.uk/
+MR-Base,Automated Mendelian randomization,2016,https://www.mrbase.org/
+epiGPU,Exhaustive searches for genetic interactions parallelised across graphics cards,2012,https://github.com/explodecomputer/epigpu
+AscRtain,Sensitivity analysis for collider bias in observational data,2020,https://github.com/explodecomputer/epigpu
+GoDMC,Website and API for querying genetic assocations with DNA methylation,2019,http://mqtldb.godmc.org.uk/
+ALSPAC data dictionary,R package and web-app for searching for ALSPAC variables,2017,http://variables.alspac.bris.ac.uk/
+USS pension model,Web-app for projected pensions across different valuations,2018,http://www.uss-pension-model.com/
+MR-TRYX,Exploiting horizontal pleiotropy in Mendelian randomization,2019,https://explodecomputer.github.io/tryx/
+gctaPower,Power calculations for genomic REML analysis,2013,https://shiny.cnsgenomics.com/gctaPower/
+simulateGP,Simulation methods for genotype-phenotype associations,2016,https://explodecomputer.github.io/simulateGP/
