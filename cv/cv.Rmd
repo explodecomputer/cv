@@ -18,188 +18,407 @@ knitr::opts_chunk$set(echo = FALSE,
                       warning = FALSE,
                       message = FALSE)
 source("../scripts/install.R")
+
+separate_why <- function(x)
+{
+  x %>%
+    dplyr::mutate(why = strsplit(why, "\\. ")) %>%
+    tidyr::unnest(why)
+}
+
+
 ```
 
-```{r get data, include=FALSE}
+# Education
 
-## Employment
-jobs <- read_csv(here::here("data", "jobs.csv"))
-
-## Education
-edu <- read_csv(here("data", "education.csv"))
-
-## Publications - change google id here
-scholar_id <- "6fC0BYYAAAAJ"
-pubs <- scholar::get_publications(scholar_id) %>%
-  dplyr::mutate(author = author %>% 
-                as.character %>% 
-                stringr::str_trim()) %>%
-  dplyr::select(pubid, title, dplyr::everything())
-write.csv(pubs, here("data", "pubs.csv"))
-selected_pubs <- read_csv(here("data", "selected_pubs.csv"))
-
-scholar_profile <- scholar::get_profile(scholar_id)
-h_index <- scholar_profile$h_index
-i10_index <- scholar_profile$i10_index
-
-
-## Software
-software <- read_csv(here::here("data", "software.csv")) %>% 
-  arrange(desc(when)) 
-
-## Dashboards
-dashboards <- read_csv(here::here("data", "dashboards.csv")) %>% 
-  arrange(desc(when)) 
-
-## Teaching
-teaching <- read_csv(here::here("data", "teaching.csv")) %>% 
-  arrange(desc(when))
-
-## Presentations
-presentations <- read_csv(here::here("data", "presentations.csv")) %>% 
-  arrange(desc(when))
-
-## Training
-training <- read_csv(here::here("data", "training.csv")) %>% 
-  arrange(desc(end))
-
-## Skills
-skills <- read_csv(here::here("data", "skills.csv")) %>% 
-  group_by(category) %>% 
-  mutate(skill = paste(skill, collapse = ", ")) %>% 
-  ungroup %>% 
-  unique
-
-## Service
-service <- read_csv(here::here("data", "service.csv"))
-```
-
-# Education 
 ```{r}
-detailed_entries(edu, 
-                 when = glue("{start_date}--{end_date}"),
-                 what = degree,
-                 where = loc,
-                 with = uni,
-                 why = details)
-
+read_csv(here("data", "education.csv")) %>%
+  detailed_entries(
+    when = glue("{start_date} to {end_date}"),
+    what = degree,
+    where = loc,
+    with = uni,
+    why = details
+)
 ```
 
-# Experience
+# Employment
 
 ```{r research}
-jobs %>% 
+read_csv(here("data", "jobs.csv")) %>%
   detailed_entries(
     what = role,
-    when = glue("{start_date}--{end_date}"),
+    when = glue("{start_date} to {end_date}"),
     with = company,
     where = where,
     why = details)
 ```
-# Skills
 
-```{r}
-skills %>% 
-  detailed_entries(what = skill, with = category)
+# Awards
+
+```{r awards}
+read_csv(here("data", "awards.csv")) %>%
+  detailed_entries(
+    with = what,
+    what = why,
+    when = when,
+    where = where
+)
 ```
-\pagebreak
 
-# Training
-
-```{r}
-training %>% 
-  detailed_entries(what = what, with = with, when = when, where = where, why = why)
-```
 # Teaching
+
+Though I have only had research-based academic appointments, I have found many opportunities to develop a variety of different teaching materials from my PhD to present. While at the University of Bristol I received invitations to develop and deliver week-long courses to researchers at the Wellcome Genome Campus, and institutions in Italy (with one other person), Brazil (coordinating a group of teachers) and South Africa (with one other person). I have also developed and directed a 20-credit module on genomic data science for intercalating medical students at the University Bristol, training students in critical reasoning and computer programming. I am leading the Anti-Racism special interest group in Decolonising the Curriculum, whose plans I detail at the end of the CV.
+
+## (i) Undergraduate and taught postgraduate (past 3 years)
+
+```{r}
+
+## Teaching
+teaching <- read_csv(here::here("data", "teaching.csv")) %>% 
+  arrange(desc(when)) %>%
+  separate_why()
+
+teaching %>% 
+  subset(., type == "taught ug and pg") %>%
+  detailed_entries(with=with, what = what, when = when, why = why, where=where)
+```
+
+## (ii) Major teaching responsibilities in previous years
 
 ```{r}
 teaching %>% 
-  detailed_entries(what = what, when = when, with = with, where = where, why = why)
+  subset(., type == "previous teaching") %>%
+  detailed_entries(with=with, what = what, when = when, why = why, where=where)
 ```
 
-# Publications
+## (iii) Innovatory units and teaching methods
 
-**First author**
+**Flipped classroom:** In the second year of the iBSc Genomic Medicine course I redesigned the R programming training section to be a flipped classroom, using online games for students to learn the basic principles of programming at home and the tutor led sessions as an opportunity to synthesise those skills into applied examples. The students were more adept at programming than in the previous year, and also more enthused about the subject. I transitioned the rest of the module to a flipped classroom in 2020 during the Covid-19 pandemic.
+
+
+## (iv) Contribution to Life-long learning and continuing professional development courses
+
+#### Short courses that I have (co-)written and led in the last 3 years
+
+```{r}
+teaching %>% 
+  subset(., type == "shortcourse") %>%
+  detailed_entries(with=with, what = what, when = when, why = why, where=where)
+```
+
+#### Lecturing contributions
+
+```{r}
+teaching %>% 
+  subset(., type == "lecturing contributions") %>%
+  detailed_entries(with=with, what = what, when = when, why = why, where=where)
+```
+
+## (v) Collaborative teaching projects
+
+Developed external speaker programmes for iBSc medical students, involving Jeff Barrett from OpenTargets and the Sanger Institute; Rob Scott from GlaxoSmithKlein; and Jonathan Ives from the Centre for Ethics in Medicine.
+
+## (iv) Postgraduate advising
+
+#### PhD Supervision
+
+```{r}
+postgrad <- read_csv(here::here("data", "postgrad.csv")) %>% 
+  arrange(desc(when))
+
+postgrad %>% 
+  subset(., where == "phd") %>%
+  detailed_entries(what = with, when = when, with = what, why = why)
+```
+
+#### Mini projects
+
+```{r}
+postgrad %>% 
+  subset(., where == "mini project") %>%
+  detailed_entries(what = with, when = when, with = what, why = why)
+```
+
+
+## (vii) Major achievements in teaching administration
+
+**Anti-racism:** I co-lead the Special Interest Group on decolonising the curriculum in the Bristol Medical School. I am creating a framework by which course leads across the school can identify racial biases in their teaching methods and materials, work towards address them, and obtain independent course review from external peers. 
+
+**Courses on my software:** I developed a course to teach researchers how to use my own software (MR-Base), with the course being heavily over-subscribed and gaining very positive feedback and increased usage of the software.
+
+
+# Research and related administration
+
+I was awarded a Wellcome Trust Sir Henry Dale fellowship award in 2018. I have translated my background in quantitative genetics and high performance computing to genetic epidemiology research, resulting in the development of the MR-Base causal inference analytical platform and OpenGWAS data infrastructure. This software is used by researchers within the institute and around the world, has led directly to funding for five post-doctoral positions from three private companies (GSK, Biogen, CHDI). I currently lead or co-lead two major international collaborations: The GoDMC consortium comprising 56 cohorts analysing the genetics of DNA methylation; the OpenGWAS consortium that combines the resources of over 100 groups and consortia.
+
+## (i) Publications
+
+```{r}
+scholar_id <- "6fC0BYYAAAAJ"
+pubs <- scholar::get_publications(scholar_id) %>%
+  dplyr::mutate(author = author %>% 
+                  as.character %>% 
+                  stringr::str_trim() %>% 
+                  gsub("\\.\\.\\.", "et al", .)) %>%
+  dplyr::select(pubid, title, dplyr::everything()) %>%
+  arrange(desc(year))
+write.csv(pubs, here("data", "pubs.csv"))
+
+selected_pubs <- read_csv(here("data", "selected_pubs.csv"))
+scholar_profile <- scholar::get_profile(scholar_id)
+h_index <- scholar_profile$h_index
+i10_index <- scholar_profile$i10_index
+
+convert_to_bib <- function(x)
+{
+  tmpfile <- paste0(tempfile(), ".bib")
+  tibble(
+    CATEGORY="ARTICLE",
+    BIBTEXKEY=x$pubid,
+    AUTHOR=
+      strsplit(x$author, split=", ") %>%
+      lapply(., function(i) {
+        stringr::str_split(i, " ", n=2) %>%
+        sapply(., function(j) {
+          paste(rev(j), collapse=", ")
+          }) %>%
+        gsub("al, et", "others", .)
+      }),
+    JOURNAL=x$journal,
+    NUMBER=x$number,
+    YEAR=x$year
+  ) %>% bib2df::df2bib(file=tmpfile)
+  bibliography_entries(tmpfile)
+}
+```
+
+Full publication list on google scholar: [https://scholar.google.com/citations?user=6fC0BYYAAAAJ&hl=en](https://scholar.google.ca/citations?hl=en&user=6fC0BYYAAAAJ).
+
+- H-index: **`r h_index`**
+- i10-index: **`r i10_index`**
+- Number of publications: **`r nrow(pubs)`**
+
+Selected publications below, organised by category and contribution
+
+#### Academic journal papers (refereed, first or joint first author)
 
 ```{r}
 pubs %>% 
-  dplyr::filter(first_author, !preprint) %>% 
-  detailed_entries(
-    what = title,
-    when = as.character(year),
-    with = author,
-    where = journal, 
-    .protect = TRUE
-  )
+  dplyr::filter(pubid %in% subset(selected_pubs, role=="main author" & type == "peer reviewed journal article")$pubid) %>%
+  convert_to_bib()
 ```
 
-**Non-first author**
+#### Academic journal papers (refereed, Senior or joint senior author)
 
 ```{r}
 pubs %>% 
-  dplyr::filter(!first_author, !preprint) %>% 
-  detailed_entries(
-    what = title,
-    when = as.character(year),
-    with = author,
-    where = journal,
-    .protect = TRUE
-  )
+  dplyr::filter(pubid %in% subset(selected_pubs, role=="senior" & type == "peer reviewed journal article")$pubid) %>%
+  convert_to_bib()
 ```
 
-**Preprints**
+#### Academic journal papers (refereed, main analytical or design contribution)
 
 ```{r}
 pubs %>% 
-  dplyr::filter(preprint) %>% 
-  detailed_entries(
-    what = title,
-    when = as.character(year),
-    with = author,
-    where = journal, 
-    .protect = TRUE
-  )
+  dplyr::filter(pubid %in% subset(selected_pubs, role=="main analyst" & type == "peer reviewed journal article")$pubid) %>%
+  convert_to_bib()
 ```
 
-*Updated programmatically each week. See [here](https://scholar.google.com/citations?user=GqZm90IAAAAJ&hl=en) for DOIs and citation details.*
-
-\pagebreak
-
-# Selected Software
-
-**`R` Packages**
+#### Review articles (main author)
 
 ```{r}
-software %>% 
-  detailed_entries(what = what, with = package, when = when, where = where, why = why)
+pubs %>% 
+  dplyr::filter(pubid %in% subset(selected_pubs, role %in% c("main author", "senior") & type == "review article")$pubid) %>%
+  convert_to_bib()
 ```
 
-**Interactive tools**
+## (ii) Forthcoming publications
+
+#### First or joint first author
 
 ```{r}
-dashboards %>% 
-  dplyr::mutate(with = what, 
-                what = why) %>% 
-  detailed_entries(what = what, with = with, when = when, where = where)
+pubs %>% 
+  dplyr::filter(pubid %in% subset(selected_pubs, role %in% c("main author") & type == "preprint")$pubid) %>%
+  convert_to_bib()
 ```
 
-*See [my GitHub](https://github.com/seabbs/) for a complete overview of my software both released and in development.*
-
-# Presentations
+#### Senior or joint Senior author
 
 ```{r}
-presentations %>% 
-  detailed_entries(what = what,
-                   when = when,
-                   with = with,
-                   where = where,
-                   why = why,
-                   .protect = TRUE)
+pubs %>% 
+  dplyr::filter(pubid %in% subset(selected_pubs, role %in% c("senior") & type == "preprint")$pubid) %>%
+  convert_to_bib()
 ```
 
-# Service
+#### Selected published open source software
 
 ```{r}
-service %>% 
-  detailed_entries(with = type, why = details)
+software <- read_csv(here::here("data", "software.csv")) 
+bind_rows(
+  software %>% mutate(why=what),
+  software %>% mutate(why=where)
+) %>% 
+  arrange(desc(when), package) %>%
+  detailed_entries(what = package, when = when, why = why)
 ```
+
+
+## (iii) Research grants
+
+```{r}
+grants <- read_csv(here::here("data", "grants.csv")) %>%
+  mutate(start=as.Date(start, format=c("%d/%m/%Y")), end=as.Date(end, format=c("%d/%m/%Y"))) %>%
+  arrange(desc(start))
+
+grant_totals <- grants %>% 
+  group_by(role) %>% 
+  summarise(n=n(), income=sum(amount * conversion), incomep = format(round(as.numeric(income), 2), nsmall=0, scientific=FALSE, big.mark=","))
+
+grantsf <- grants %>% 
+  mutate(n=1:nrow(grants)) %>%
+  group_by(n) %>%
+  do({
+    x <- .
+    merge(
+      x, 
+      tibble(n=x$n[1],
+        why=paste(
+          c("Amount:", "Role:"), 
+          c(paste(format(round(as.numeric(x$amount)), nsmall=0, scientific=FALSE, big.mark=","), x$currency), x$role)
+        ),
+        when=paste(x$start, "to", x$end)
+      )
+    )
+  })
+```
+
+Total income as PI, from `r subset(grant_totals, role=="PI")$n` grants: **`r subset(grant_totals, role=="PI")$incomep` GBP**
+
+Total income as CI, from `r subset(grant_totals, role=="Co-I")$n` grants: **`r subset(grant_totals, role=="Co-I")$incomep` GBP**
+
+```{r}
+grantsf  %>%
+  detailed_entries(with=title, why=why, when=when, what=funder)
+```
+
+## (iv) Indications of external recognition
+
+#### Editorships
+
+```{r}
+tibble(
+  what="Invited guest editor for PLoS Computational Biology",
+  when="2017"
+) %>%
+  detailed_entries(what=what, when=when)
+```
+
+#### Appointment to national or international bodies
+
+```{r}
+tibble(
+  what="EDDRP chip design committee",
+  when="2019",
+  why="Invitation to a committee for designing the genotyping array for the Early Disease Detection Research Project, which will genotype 5 million UK participants by 2024"
+) %>%
+  detailed_entries(what=what, when=when, why=why)
+```
+
+#### Invitations for degree examinations
+
+```{r}
+read_csv(here::here("data", "degree_examination.csv")) %>%
+  arrange(desc(when)) %>%
+  detailed_entries(what=what, where=where, with=who, when=when)
+```
+
+#### Invited lectures (last 3 years)
+
+```{r}
+talks <- read_csv(here::here("data", "talks.csv")) %>% 
+  arrange(desc(when)) %>%
+  filter(when >= (now() %>% year() - 3)) %>%
+  arrange(desc(when)) %>%
+  detailed_entries(what=what, with=who, when=when, where=type, why=details)
+```
+
+## (vi) Related administration
+
+```{r}
+read_csv(here::here("data", "research_management.csv")) %>%
+  mutate(where = as.character(where)) %>%
+  arrange(desc(when)) %>%
+  detailed_entries(what=with, where=where, with=what, when=when, why=why)
+```
+
+# Academic leadership and citizenship
+
+## (i) Academic leadership in the discipline
+
+```{r}
+academic_leadership <- read_csv(here::here("data", "academic_leadership.csv")) %>%
+  mutate(where = as.character(where), why = as.character(why)) %>%
+  arrange(desc(when)) %>%
+  separate_why()
+
+academic_leadership %>%
+  filter(type == "international") %>%
+  arrange(desc(when)) %>%
+  detailed_entries(what=as.character(with), where=where, with=what, when=when, why=why)
+```
+
+## (ii) Academic leadership in the University
+
+```{r}
+academic_leadership %>%
+  filter(type == "university") %>%
+  arrange(desc(when)) %>%
+  detailed_entries(what=as.character(with), where=where, with=what, when=when, why=why)
+```
+
+## (iii) Professional activities outside the University
+
+```{r}
+academic_misc <- read_csv(here::here("data", "academic_misc.csv")) %>%
+  arrange(desc(when))
+
+academic_misc %>%
+  filter(type=="professional") %>%
+  brief_entries(what=what, when=when)
+```
+
+## (iv) Contributions to society
+
+```{r}
+academic_misc %>%
+  filter(type=="society") %>%
+  brief_entries(what=what, when=when)
+```
+
+## (v) Entrepreneurship, enterprise and partnerships
+
+```{r}
+academic_misc %>%
+  filter(type=="entrepreneurship") %>%
+  brief_entries(what=what, when=when)
+```
+
+
+## (vi) Good citizenship
+
+```{r}
+academic_misc %>%
+  filter(type=="citizenship") %>%
+  brief_entries(what=what, when=when)
+```
+
+
+# Future plans
+
+My fellowship is focused on implementing causal inference on a phenome-wide scale, creating a graph of the causal estimates of every phenotype against every other phenotype. I will create collaborations within the University and externally with experts in artificial intelligence, to explore new ways to exploit this graph for biological understanding and medical applications. I will use my causal graph to develop new ways to engage with the public, exploring how perceived ideas of medical interventions would shape future trajectories of population disease burden.
+
+I plan to develop a new professional development course that guides junior researchers and post-graduate stu- dents through best practices in code and data management and reproducible digital research.
+
+Through leading the special interest group on decolonising the curriculum, my goal is to develop a method of acreditation for courses across the medical school to introspectively examine potential biases in their teaching materials, identify ways of addressing them, and seek external review of proposed changes. This is a project of crucial importance for equiping the graduates and trainees in redressing biases that continue to incur health inequalities between ethnic groups.
+
