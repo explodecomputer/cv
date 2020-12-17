@@ -184,6 +184,7 @@ convert_to_bib <- function(x)
           }) %>%
         gsub("al, et", "others", .)
       }),
+    TITLE=x$title,
     JOURNAL=x$journal,
     NUMBER=x$number,
     YEAR=x$year,
