@@ -11,6 +11,7 @@ aboutme:
 date: "`r format(Sys.time(), '%B %Y')`"
 headcolor: "000000"
 output: vitae::awesomecv
+csl: "nature.csl"
 ---
 
 ```{r setup, include=FALSE}
@@ -29,7 +30,35 @@ separate_why <- function(x)
 
 ```
 
-# Education
+
+
+# Present Appointment
+
+```{r employment}
+jobs <- read_csv(here("data", "jobs.csv")) 
+
+jobs[1,] %>%
+  detailed_entries(
+    what = role,
+    when = glue("{start_date} to {end_date}"),
+    with = company,
+    where = where,
+    why = details)
+```
+
+# Previous Appointments
+
+```{r}
+jobs[-1,] %>%
+  detailed_entries(
+    what = role,
+    when = glue("{start_date} to {end_date}"),
+    with = company,
+    where = where,
+    why = details)
+```
+
+# Academic Qualifications
 
 ```{r}
 read_csv(here("data", "education.csv")) %>%
@@ -42,19 +71,7 @@ read_csv(here("data", "education.csv")) %>%
 )
 ```
 
-# Employment
-
-```{r research}
-read_csv(here("data", "jobs.csv")) %>%
-  detailed_entries(
-    what = role,
-    when = glue("{start_date} to {end_date}"),
-    with = company,
-    where = where,
-    why = details)
-```
-
-# Awards
+# Special Awards, Honours and Distinctions
 
 ```{r awards}
 read_csv(here("data", "awards.csv")) %>%
@@ -66,7 +83,7 @@ read_csv(here("data", "awards.csv")) %>%
 )
 ```
 
-# Teaching
+# Teaching and related administration
 
 Though I have only had research-based academic appointments, I have found many opportunities to develop a variety of different teaching materials from my PhD to present. While at the University of Bristol I received invitations to develop and deliver week-long courses to researchers at the Wellcome Genome Campus, and institutions in Italy (with one other person), Brazil (coordinating a group of teachers) and South Africa (with one other person). I have also developed and directed a 20-credit module on genomic data science for intercalating medical students at the University Bristol, training students in critical reasoning and computer programming. I am leading the Anti-Racism special interest group in Decolonising the Curriculum, whose plans I detail at the end of the CV.
 
@@ -119,27 +136,21 @@ teaching %>%
 
 Developed external speaker programmes for iBSc medical students, involving Jeff Barrett from OpenTargets and the Sanger Institute; Rob Scott from GlaxoSmithKlein; and Jonathan Ives from the Centre for Ethics in Medicine.
 
+Also see above for details on a number of short courses in Australia, Brazil, Italy, South Africa and Cambridge, which were co-developed with colleagues from those regions.
+
 ## (iv) Postgraduate advising
 
 #### PhD Supervision
 
 ```{r}
 postgrad <- read_csv(here::here("data", "postgrad.csv")) %>% 
-  arrange(desc(when))
+  arrange(desc(when)) %>%
+  separate_why()
 
 postgrad %>% 
   subset(., where == "phd") %>%
   detailed_entries(what = with, when = when, with = what, why = why)
 ```
-
-#### Mini projects
-
-```{r}
-postgrad %>% 
-  subset(., where == "mini project") %>%
-  detailed_entries(what = with, when = when, with = what, why = why)
-```
-
 
 ## (vii) Major achievements in teaching administration
 
@@ -155,24 +166,12 @@ I was awarded a Wellcome Trust Sir Henry Dale fellowship award in 2018. I have t
 ## (i) Publications
 
 ```{r}
-scholar_id <- "6fC0BYYAAAAJ"
-pubs <- scholar::get_publications(scholar_id) %>%
-  dplyr::mutate(author = author %>% 
-                  as.character %>% 
-                  stringr::str_trim() %>% 
-                  gsub("\\.\\.\\.", "et al", .)) %>%
-  dplyr::select(pubid, title, dplyr::everything()) %>%
-  arrange(desc(year))
-write.csv(pubs, here("data", "pubs.csv"))
-
-selected_pubs <- read_csv(here("data", "selected_pubs.csv"))
-scholar_profile <- scholar::get_profile(scholar_id)
-h_index <- scholar_profile$h_index
-i10_index <- scholar_profile$i10_index
-
+load(here("data", "pubs.rdata"))
 convert_to_bib <- function(x)
 {
-  tmpfile <- paste0(tempfile(), ".bib")
+  Encoding(x$author) <- "UTF-8"
+  x$author <- iconv(x$author, "UTF-8", "UTF-8", sub="")
+  tmpfile <- here("data", "pubs.bib")
   tibble(
     CATEGORY="ARTICLE",
     BIBTEXKEY=x$pubid,
@@ -187,71 +186,47 @@ convert_to_bib <- function(x)
       }),
     JOURNAL=x$journal,
     NUMBER=x$number,
-    YEAR=x$year
+    YEAR=x$year,
+    NOTE=x$info
   ) %>% bib2df::df2bib(file=tmpfile)
   bibliography_entries(tmpfile)
 }
 ```
 
-Full publication list on google scholar: [https://scholar.google.com/citations?user=6fC0BYYAAAAJ&hl=en](https://scholar.google.ca/citations?hl=en&user=6fC0BYYAAAAJ).
+Selected publications organised by category are listed below. Full publication list on google scholar: [https://scholar.google.com/citations?user=6fC0BYYAAAAJ&hl=en](https://scholar.google.ca/citations?hl=en&user=6fC0BYYAAAAJ).
 
 - H-index: **`r h_index`**
 - i10-index: **`r i10_index`**
-- Number of publications: **`r nrow(pubs)`**
+- Number of publications: **`r npubs`**
 
-Selected publications below, organised by category and contribution
-
-#### Academic journal papers (refereed, first or joint first author)
+**Academic journal papers (refereed)**
 
 ```{r}
 pubs %>% 
-  dplyr::filter(pubid %in% subset(selected_pubs, role=="main author" & type == "peer reviewed journal article")$pubid) %>%
+  dplyr::filter(type == "peer reviewed journal article") %>%
   convert_to_bib()
 ```
 
-#### Academic journal papers (refereed, Senior or joint senior author)
+**Review articles**
 
 ```{r}
 pubs %>% 
-  dplyr::filter(pubid %in% subset(selected_pubs, role=="senior" & type == "peer reviewed journal article")$pubid) %>%
+  dplyr::filter(type == "review article") %>%
   convert_to_bib()
 ```
 
-#### Academic journal papers (refereed, main analytical or design contribution)
+
+**Academic Journal Papers (not refereed)**
+
+These papers are currently under review and are made publicly available on pre-print servers.
 
 ```{r}
 pubs %>% 
-  dplyr::filter(pubid %in% subset(selected_pubs, role=="main analyst" & type == "peer reviewed journal article")$pubid) %>%
+  dplyr::filter(type == "preprint") %>%
   convert_to_bib()
 ```
 
-#### Review articles (main author)
-
-```{r}
-pubs %>% 
-  dplyr::filter(pubid %in% subset(selected_pubs, role %in% c("main author", "senior") & type == "review article")$pubid) %>%
-  convert_to_bib()
-```
-
-## (ii) Forthcoming publications
-
-#### First or joint first author
-
-```{r}
-pubs %>% 
-  dplyr::filter(pubid %in% subset(selected_pubs, role %in% c("main author") & type == "preprint")$pubid) %>%
-  convert_to_bib()
-```
-
-#### Senior or joint Senior author
-
-```{r}
-pubs %>% 
-  dplyr::filter(pubid %in% subset(selected_pubs, role %in% c("senior") & type == "preprint")$pubid) %>%
-  convert_to_bib()
-```
-
-#### Selected published open source software
+**Selected published open source software**
 
 ```{r}
 software <- read_csv(here::here("data", "software.csv")) 
@@ -262,6 +237,16 @@ bind_rows(
   arrange(desc(when), package) %>%
   detailed_entries(what = package, when = when, why = why)
 ```
+
+
+## (ii) Forthcoming publications
+
+```{r}
+pubs %>% 
+  dplyr::filter(type == "forthcoming") %>%
+  convert_to_bib()
+```
+
 
 
 ## (iii) Research grants
@@ -284,10 +269,12 @@ grantsf <- grants %>%
       x, 
       tibble(n=x$n[1],
         why=paste(
-          c("Amount:", "Role:"), 
-          c(paste(format(round(as.numeric(x$amount)), nsmall=0, scientific=FALSE, big.mark=","), x$currency), x$role)
+          c("Amount:", "Role:", "Dates:", "Proportion:"), 
+          c(paste(format(round(as.numeric(x$amount)), nsmall=0, scientific=FALSE, big.mark=","), x$currency), x$role,
+          paste(x$start, "to", x$end),
+          x$perc)
         ),
-        when=paste(x$start, "to", x$end)
+        when=x$awarded
       )
     )
   })
@@ -308,21 +295,23 @@ grantsf  %>%
 
 ```{r}
 tibble(
-  what="Invited guest editor for PLoS Computational Biology",
+  with="PLoS Computational Biology",
+  what="Invited guest editor",
   when="2017"
 ) %>%
-  detailed_entries(what=what, when=when)
+  detailed_entries(what=what, when=when, with=with)
 ```
 
 #### Appointment to national or international bodies
 
 ```{r}
 tibble(
-  what="EDDRP chip design committee",
+  with="Early Disease Detection Research Project",
+  what="Member of chip design committee",
   when="2019",
   why="Invitation to a committee for designing the genotyping array for the Early Disease Detection Research Project, which will genotype 5 million UK participants by 2024"
 ) %>%
-  detailed_entries(what=what, when=when, why=why)
+  detailed_entries(what=what, when=when, why=why, with=with)
 ```
 
 #### Invitations for degree examinations
@@ -333,10 +322,12 @@ read_csv(here::here("data", "degree_examination.csv")) %>%
   detailed_entries(what=what, where=where, with=who, when=when)
 ```
 
+\newpage
+
 #### Invited lectures (last 3 years)
 
 ```{r}
-talks <- read_csv(here::here("data", "talks.csv")) %>% 
+read_csv(here::here("data", "talks.csv")) %>% 
   arrange(desc(when)) %>%
   filter(when >= (now() %>% year() - 3)) %>%
   arrange(desc(when)) %>%

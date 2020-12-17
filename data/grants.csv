@@ -1,11 +1,11 @@
-﻿funder,title,start,end,role,who,amount,currency,conversion
-Cure Huntington’s Disease Initiative ,Genetic architecture of Huntington's disease progression (Contracts pending),01/01/2021,31/12/2022,PI,"Gibran Hemani (PI), Tom Gaunt (Co-I)","598,880.98",GBP,1
-Biogen,Aetiological Epidemiology,01/09/2020,31/08/2022,Co-I,"Tom Gaunt (PI), Gibran Hemani (Co-I), Jie Zheng (Co-I), Philip Haycock (Co-I)","284,524.60",GBP,1
-"Wellcome Trust and Royal Society, Sir Henry Dale Fellowship ",The causal map of the human phenome,04/01/2018,30/06/2023,PI,Hemani G (PI),"1,356,578",GBP,1
-"BBSRC and GlaxoSmithKline, CASE studentship",Classifying mechanisms of pleiotropy to improve causal modelling ,01/10/2017,30/09/2021,PI,"Hemani G (co-PI), Sott R (co-PI), Nelson M, Davey Smith G",100000,GBP,1
-GlaxoSmithKline ,Translation of MR for drug target identification; De- tails ,01/01/2017,01/01/2020,Co-I,"Tom Gaunt (PI), George Davey Smith (co-PI), Gibran Hemani (co-I) ",349099,GBP,1
-Biogen,Translation of MR for drug target identification ,01/01/2017,01/01/2020,Co-I,"Tom Gaunt (PI), George Davey Smith (co-PI), Gibran Hemani (co- I)","436,165",USD,0.82
-Cure Huntington’s Disease Initiative ,Identification of Traits and Biomarkers for Prediction of Huntington’s Disease Phenotypes using Novel causal analysis Methodologies ,01/04/2017,31/03/2019,Co-I,"Tom Gaunt (PI), George Davey Smith (co-I), Gibran Hemani (co-I) ","117,059",GBP,1
-Medical Research Councal and Medical Research Foundation ,Pathways to self-harm: Biological mechanisms and genetic contribution ,01/10/2017,01/10/2019,Co-I,"Rebecca Mars (PI), Gibran Hemani (Co-I)","372,334.22",GBP,1
-"University of Queensland, Early Career Research Grant ",Dissecting genetic interactions in gene expression,01/01/2013,31/12/2013,PI,Gibran Hemani (PI),34000,AUD,0.62
-"CASE Studentship, BBSRC and Monsanto ",Dissecting genetic interactions in complex traits,01/09/2007,30/08/2011,PI,Gibran Hemani (PI),100000,GBP,1
+﻿funder,title,start,end,role,who,amount,currency,conversion,perc,awarded
+Cure Huntington’s Disease Initiative ,Genetic architecture of Huntington's disease progression (Contracts pending),01/01/2021,31/12/2022,PI,"Gibran Hemani (PI), Tom Gaunt (Co-I)","598,880.98",GBP,1,10%,2020
+Biogen,Aetiological Epidemiology,01/09/2020,31/08/2022,Co-I,"Tom Gaunt (PI), Gibran Hemani (Co-I), Jie Zheng (Co-I), Philip Haycock (Co-I)","284,524.60",GBP,1,5%,2020
+"Wellcome Trust and Royal Society, Sir Henry Dale Fellowship ",The causal map of the human phenome,04/01/2018,30/06/2023,PI,Hemani G (PI),"1,356,578",GBP,1,100%,2017
+"BBSRC and GlaxoSmithKline, CASE studentship",Classifying mechanisms of pleiotropy to improve causal modelling ,01/10/2017,30/09/2021,PI,"Hemani G (co-PI), Sott R (co-PI), Nelson M, Davey Smith G",100000,GBP,1,5%,2017
+GlaxoSmithKline ,Translation of MR for drug target identification; De- tails ,01/01/2017,01/01/2020,Co-I,"Tom Gaunt (PI), George Davey Smith (co-PI), Gibran Hemani (co-I) ",349099,GBP,1,5%,2017
+Biogen,Translation of MR for drug target identification ,01/01/2017,01/01/2020,Co-I,"Tom Gaunt (PI), George Davey Smith (co-PI), Gibran Hemani (co- I)","436,165",USD,0.82,5%,2017
+Cure Huntington’s Disease Initiative ,Identification of Traits and Biomarkers for Prediction of Huntington’s Disease Phenotypes using Novel causal analysis Methodologies ,01/04/2017,31/03/2019,Co-I,"Tom Gaunt (PI), George Davey Smith (co-I), Gibran Hemani (co-I) ","117,059",GBP,1,10%,2017
+Medical Research Councal and Medical Research Foundation ,Pathways to self-harm: Biological mechanisms and genetic contribution ,01/10/2017,01/10/2019,Co-I,"Rebecca Mars (PI), Gibran Hemani (Co-I)","372,334.22",GBP,1,5%,2017
+"University of Queensland, Early Career Research Grant ",Dissecting genetic interactions in gene expression,01/01/2013,31/12/2013,PI,Gibran Hemani (PI),34000,AUD,0.62,2%,2013
+"CASE Studentship, BBSRC and Monsanto ",Dissecting genetic interactions in complex traits,01/09/2007,30/08/2011,PI,Gibran Hemani (PI),100000,GBP,1,100%,2007
