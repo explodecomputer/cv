@@ -356,7 +356,7 @@ academic_leadership <- read_csv(here::here("data", "academic_leadership.csv")) %
 academic_leadership %>%
   filter(type == "international") %>%
   arrange(desc(when)) %>%
-  detailed_entries(what=as.character(with), where=where, with=what, when=when, why=why)
+  detailed_entries(what=as.character(what), where=where, with=with, when=when, why=why)
 ```
 
 ## (ii) Academic leadership in the University
@@ -365,7 +365,7 @@ academic_leadership %>%
 academic_leadership %>%
   filter(type == "university") %>%
   arrange(desc(when)) %>%
-  detailed_entries(what=as.character(with), where=where, with=what, when=when, why=why)
+  detailed_entries(what=as.character(what), where=where, with=with, when=when, why=why)
 ```
 
 ## (iii) Professional activities outside the University
