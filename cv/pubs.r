@@ -43,6 +43,10 @@ pubs <- pubs %>% mutate(
   info = case_when(
     str_count(author, ",") >= 5 ~ paste0(info, ". Position: ", authorpos),
     TRUE ~ info
+  ),
+  info = case_when(
+    !is.na(pos) ~ paste0(info, " (", pos, ")"),
+    TRUE ~ info
   )
 )
 

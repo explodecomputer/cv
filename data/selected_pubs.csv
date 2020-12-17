@@ -1,45 +1,45 @@
-﻿pubid,title,role,note,type
-IjCSPb-OGe4C,Mendelian randomization: genetic anchors for causal inference in epidemiological studies,main author,,review article
-3s1wT3WcHBgC,The MR-Base platform supports systematic causal inference across the human phenome,main author,International co-authors,peer reviewed journal article
-KlAtU1dfN6UC,Genetic variance estimation with imputed variants finds negligible missing heritability for human height and body mass index,main analyst,International co-authors,peer reviewed journal article
-u5HHmVD_uO8C,Improved heritability estimation from genome-wide SNPs,main analyst,International co-authors,peer reviewed journal article
-aqlVkmm33-oC,Systematic identification of genetic influences on methylation across the human life course,main author,,peer reviewed journal article
-WF5omc3nYNoC,Detecting epistasis in human complex traits,main author,International co-authors,review article
-qjMakFHDy7sC,Statistical power to detect genetic (co) variance of complex traits using SNP data in unrelated samples,main analyst,International co-authors,peer reviewed journal article
-SeFeTyx0c_EC,Evaluating the potential role of pleiotropy in Mendelian randomization studies,main author,,review article
-9yKSN-GCB0IC,Detection and replication of epistasis influencing transcription in humans,main author,International co-authors,peer reviewed journal article
-Y0pCki6q_DkC,Contribution of genetic variation to transgenerational inheritance of DNA methylation,main analyst,International co-authors,peer reviewed journal article
-HDshCWvjkbEC,Orienting the causal relationship between imprecisely measured traits using GWAS summary data,main author,,peer reviewed journal article
-Zph67rFs4hoC,Population genetic differentiation of height and body mass index across Europe,main analyst,International co-authors,peer reviewed journal article
-u-x6o8ySG0sC,An evolutionary perspective on epistasis and the missing heritability,main author,,peer reviewed journal article
-d1gkVwhDpl0C,EpiGPU: exhaustive pairwise epistasis scans parallelized on consumer level graphics cards,main author,,peer reviewed journal article
-4TOpqqG69KYC,Plasma urate concentration and risk of coronary heart disease: a Mendelian randomisation analysis,main analyst,,peer reviewed journal article
-zYLM7Y9cAGgC,"Inference of the genetic architecture underlying BMI and height with the use of 20,240 sibling pairs",main author,International co-authors,peer reviewed journal article
-TFP_iSt0sucC,Estimating the causal influence of body mass index on risk of Parkinson disease: A Mendelian randomisation study,main analyst,,peer reviewed journal article
-mVmsd5A6BfQC,Challenges and novel approaches for investigating molecular mediation,main author,,review article
-KxtntwgDAa4C,An atlas of polygenic risk score associations to highlight putative causal relationships across the human phenome,main analyst,,peer reviewed journal article
-4JMBOYKVnBMC,Meffil: efficient normalization and analysis of very large DNA methylation datasets,main analyst,,peer reviewed journal article
-GnPB-g6toBAC,Mendelian randomization analysis identifies CpG sites as putative mediators for genetic influences on cardiovascular disease risk,senior author,,peer reviewed journal article
-D03iK_w7-QYC,Genetic association of albuminuria with cardiometabolic disease and blood pressure,main analyst,International co-authors,peer reviewed journal article
-rO6llkc54NcC,Systematic Mendelian randomization framework elucidates hundreds of CpG sites which may mediate the influence of genetic variants on disease,senior author,,peer reviewed journal article
-Tiz5es2fbqcC,Trans-ethnic kidney function association study reveals putative causal genes and effects on kidney-specific disease aetiologies,main analyst,International co-authors,peer reviewed journal article
-JV2RwH3_ST0C,Automating Mendelian randomization through machine learning to construct a putative causal map of the human phenome,main author,,preprint
-fQNAKQ3IYiAC,"Is population structure in the genetic biobank era irrelevant, a challenge, or an opportunity?",senior author,,peer reviewed journal article
-UHK10RUVsp4C,Collider bias undermines our understanding of COVID-19 disease risk and severity,senior author,,peer reviewed journal article
-eflP2zaiRacC,"Integrative analysis of gene expression, DNA methylation, physiological traits, and genetic variation in human skeletal muscle",main analyst,International co-authors,peer reviewed journal article
-LjlpjdlvIbIC,A transcriptome-wide Mendelian randomization study to uncover tissue-dependent regulatory mechanisms across the human phenome,main analyst,,peer reviewed journal article
-VOx2b1Wkg3QC,Phenome-wide Mendelian randomization mapping the influence of the plasma proteome on complex diseases,senior author,International co-authors. Non-academic co-authors,peer reviewed journal article
-dTyEYWd-f8wC,Population phenomena inflate genetic associations of complex social traits,senior author,,peer reviewed journal article
-35N4QoGY0k4C,Investigating the shared genetics of non-syndromic cleft lip/palate and facial morphology,senior author,,peer reviewed journal article
-EUQCXRtRnyEC,Evidence for DNA methylation mediating genetic liability to non-syndromic cleft lip/palate,senior author,,peer reviewed journal article
-AXPGKjj_ei8C,Genetic evidence for assortative mating on alcohol consumption in the UK Biobank,senior author,,peer reviewed journal article
-RYcK_YlVTxYC,Identification of loci where DNA methylation potentially mediates genetic risk of type 1 diabetes,senior author,,peer reviewed journal article
-yD5IFk8b50cC,"Education, intelligence and Alzheimer‚Äôs disease: evidence from a multivariable two-sample Mendelian randomization study",senior author,,peer reviewed journal article
-PR6Y55bgFSsC,Exploiting horizontal pleiotropy to search for causal pathways within a Mendelian randomization framework,senior author,,peer reviewed journal article
-evX43VCCuoAC,"Avoiding dynastic, assortative mating, and population stratification biases in Mendelian randomization through within-family analyses",senior author,,peer reviewed journal article
-j8SEvjWlNXcC,The MRC IEU OpenGWAS data infrastructure,senior author,International co-authors. Non-academic co-authors,preprint
-Fu2w8maKXqMC,The variant call format provides efficient and robust storage of GWAS summary statistics,senior author,International co-authors. Accepted in Genome Biology,forthcoming
-W5xh706n7nkC,Investigating evidence for a causal association between inflammation and self-harm: a multivariable Mendelian Randomisation study,senior author,,peer reviewed journal article
-nrtMV_XWKgEC,Exploring the variance in complex traits captured by DNA methylation assays,senior author,International co-authors,preprint
-VLnqNzywnoUC,Genomic and phenomic insights from an atlas of genetic effects on DNA methylation,main author,Accepted in Nature Genetics,forthcoming
-kzcrU_BdoSEC,The use of negative control outcomes in Mendelian Randomisation to detect potential population stratification or selection bias.,senior author,Accepted in International Journal of Epidemiology,forthcoming
+﻿pubid,title,role,note,type,pos
+IjCSPb-OGe4C,Mendelian randomization: genetic anchors for causal inference in epidemiological studies,main author,,review article,
+3s1wT3WcHBgC,The MR-Base platform supports systematic causal inference across the human phenome,main author,International co-authors,peer reviewed journal article,
+KlAtU1dfN6UC,Genetic variance estimation with imputed variants finds negligible missing heritability for human height and body mass index,main analyst,International co-authors,peer reviewed journal article,
+u5HHmVD_uO8C,Improved heritability estimation from genome-wide SNPs,main analyst,International co-authors,peer reviewed journal article,
+aqlVkmm33-oC,Systematic identification of genetic influences on methylation across the human life course,main author,,peer reviewed journal article,joint first
+WF5omc3nYNoC,Detecting epistasis in human complex traits,main author,International co-authors,review article,
+qjMakFHDy7sC,Statistical power to detect genetic (co) variance of complex traits using SNP data in unrelated samples,main analyst,International co-authors,peer reviewed journal article,
+SeFeTyx0c_EC,Evaluating the potential role of pleiotropy in Mendelian randomization studies,main author,,review article,
+9yKSN-GCB0IC,Detection and replication of epistasis influencing transcription in humans,main author,International co-authors,peer reviewed journal article,
+Y0pCki6q_DkC,Contribution of genetic variation to transgenerational inheritance of DNA methylation,main analyst,International co-authors,peer reviewed journal article,
+HDshCWvjkbEC,Orienting the causal relationship between imprecisely measured traits using GWAS summary data,main author,,peer reviewed journal article,
+Zph67rFs4hoC,Population genetic differentiation of height and body mass index across Europe,main analyst,International co-authors,peer reviewed journal article,
+u-x6o8ySG0sC,An evolutionary perspective on epistasis and the missing heritability,main author,,peer reviewed journal article,
+d1gkVwhDpl0C,EpiGPU: exhaustive pairwise epistasis scans parallelized on consumer level graphics cards,main author,,peer reviewed journal article,
+4TOpqqG69KYC,Plasma urate concentration and risk of coronary heart disease: a Mendelian randomisation analysis,main analyst,,peer reviewed journal article,
+zYLM7Y9cAGgC,"Inference of the genetic architecture underlying BMI and height with the use of 20,240 sibling pairs",main author,International co-authors,peer reviewed journal article,
+TFP_iSt0sucC,Estimating the causal influence of body mass index on risk of Parkinson disease: A Mendelian randomisation study,main analyst,,peer reviewed journal article,
+mVmsd5A6BfQC,Challenges and novel approaches for investigating molecular mediation,main author,,review article,
+KxtntwgDAa4C,An atlas of polygenic risk score associations to highlight putative causal relationships across the human phenome,main analyst,,peer reviewed journal article,
+4JMBOYKVnBMC,Meffil: efficient normalization and analysis of very large DNA methylation datasets,main analyst,,peer reviewed journal article,
+GnPB-g6toBAC,Mendelian randomization analysis identifies CpG sites as putative mediators for genetic influences on cardiovascular disease risk,senior author,,peer reviewed journal article,
+D03iK_w7-QYC,Genetic association of albuminuria with cardiometabolic disease and blood pressure,main analyst,International co-authors,peer reviewed journal article,
+rO6llkc54NcC,Systematic Mendelian randomization framework elucidates hundreds of CpG sites which may mediate the influence of genetic variants on disease,senior author,,peer reviewed journal article,
+Tiz5es2fbqcC,Trans-ethnic kidney function association study reveals putative causal genes and effects on kidney-specific disease aetiologies,main analyst,International co-authors,peer reviewed journal article,
+JV2RwH3_ST0C,Automating Mendelian randomization through machine learning to construct a putative causal map of the human phenome,main author,,preprint,
+fQNAKQ3IYiAC,"Is population structure in the genetic biobank era irrelevant, a challenge, or an opportunity?",senior author,,peer reviewed journal article,
+UHK10RUVsp4C,Collider bias undermines our understanding of COVID-19 disease risk and severity,senior author,,peer reviewed journal article,
+eflP2zaiRacC,"Integrative analysis of gene expression, DNA methylation, physiological traits, and genetic variation in human skeletal muscle",main analyst,International co-authors,peer reviewed journal article,
+LjlpjdlvIbIC,A transcriptome-wide Mendelian randomization study to uncover tissue-dependent regulatory mechanisms across the human phenome,main analyst,,peer reviewed journal article,
+VOx2b1Wkg3QC,Phenome-wide Mendelian randomization mapping the influence of the plasma proteome on complex diseases,senior author,International co-authors. Non-academic co-authors,peer reviewed journal article,joint last
+dTyEYWd-f8wC,Population phenomena inflate genetic associations of complex social traits,senior author,,peer reviewed journal article,
+35N4QoGY0k4C,Investigating the shared genetics of non-syndromic cleft lip/palate and facial morphology,senior author,,peer reviewed journal article,
+EUQCXRtRnyEC,Evidence for DNA methylation mediating genetic liability to non-syndromic cleft lip/palate,senior author,,peer reviewed journal article,
+AXPGKjj_ei8C,Genetic evidence for assortative mating on alcohol consumption in the UK Biobank,senior author,,peer reviewed journal article,
+RYcK_YlVTxYC,Identification of loci where DNA methylation potentially mediates genetic risk of type 1 diabetes,senior author,,peer reviewed journal article,
+yD5IFk8b50cC,"Education, intelligence and Alzheimer‚Äôs disease: evidence from a multivariable two-sample Mendelian randomization study",senior author,,peer reviewed journal article,
+PR6Y55bgFSsC,Exploiting horizontal pleiotropy to search for causal pathways within a Mendelian randomization framework,senior author,,peer reviewed journal article,
+evX43VCCuoAC,"Avoiding dynastic, assortative mating, and population stratification biases in Mendelian randomization through within-family analyses",senior author,,peer reviewed journal article,joint last
+j8SEvjWlNXcC,The MRC IEU OpenGWAS data infrastructure,senior author,International co-authors. Non-academic co-authors,preprint,
+Fu2w8maKXqMC,The variant call format provides efficient and robust storage of GWAS summary statistics,senior author,International co-authors. Accepted in Genome Biology,forthcoming,joint last
+W5xh706n7nkC,Investigating evidence for a causal association between inflammation and self-harm: a multivariable Mendelian Randomisation study,senior author,,peer reviewed journal article,joint last
+nrtMV_XWKgEC,Exploring the variance in complex traits captured by DNA methylation assays,senior author,International co-authors,preprint,
+VLnqNzywnoUC,Genomic and phenomic insights from an atlas of genetic effects on DNA methylation,main author,Accepted in Nature Genetics,forthcoming,joint first
+kzcrU_BdoSEC,The use of negative control outcomes in Mendelian Randomisation to detect potential population stratification or selection bias.,senior author,Accepted in International Journal of Epidemiology,forthcoming,

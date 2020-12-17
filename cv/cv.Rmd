@@ -26,11 +26,7 @@ separate_why <- function(x)
     dplyr::mutate(why = strsplit(why, "\\. ")) %>%
     tidyr::unnest(why)
 }
-
-
 ```
-
-
 
 # Present Appointment
 
@@ -83,9 +79,10 @@ read_csv(here("data", "awards.csv")) %>%
 )
 ```
 
+
 # Teaching and related administration
 
-Though I have only had research-based academic appointments, I have found many opportunities to develop a variety of different teaching materials from my PhD to present. While at the University of Bristol I received invitations to develop and deliver week-long courses to researchers at the Wellcome Genome Campus, and institutions in Italy (with one other person), Brazil (coordinating a group of teachers) and South Africa (with one other person). I have also developed and directed a 20-credit module on genomic data science for intercalating medical students at the University Bristol, training students in critical reasoning and computer programming. I am leading the Anti-Racism special interest group in Decolonising the Curriculum, whose plans I detail at the end of the CV.
+Though I have only had research-based academic appointments, I have found many opportunities to develop a variety of different teaching materials from my PhD to present. There has been a major shift towards using genetic data in epidemiological research over the last several years. My academic background in statistical genetics has created opportunities and demand for teaching in this field. I am particularly proud of my record of delivering courses on genetic epidemiology to participants who are under represented in genomic data science. In line with this I am also leading the Medical School's Anti-Racism special interest group in Decolonising the Curriculum.
 
 ## (i) Undergraduate and taught postgraduate (past 3 years)
 
@@ -113,30 +110,17 @@ teaching %>%
 
 **Flipped classroom:** In the second year of the iBSc Genomic Medicine course I redesigned the R programming training section to be a flipped classroom, using online games for students to learn the basic principles of programming at home and the tutor led sessions as an opportunity to synthesise those skills into applied examples. The students were more adept at programming than in the previous year, and also more enthused about the subject. I transitioned the rest of the module to a flipped classroom in 2020 during the Covid-19 pandemic.
 
-
 ## (iv) Contribution to Life-long learning and continuing professional development courses
 
-#### Short courses that I have (co-)written and led in the last 3 years
-
 ```{r}
 teaching %>% 
-  subset(., type == "shortcourse") %>%
-  detailed_entries(with=with, what = what, when = when, why = why, where=where)
-```
-
-#### Lecturing contributions
-
-```{r}
-teaching %>% 
-  subset(., type == "lecturing contributions") %>%
+  subset(., type %in% c("shortcourse", "lecturing contributions")) %>%
   detailed_entries(with=with, what = what, when = when, why = why, where=where)
 ```
 
 ## (v) Collaborative teaching projects
 
 Developed external speaker programmes for iBSc medical students, involving Jeff Barrett from OpenTargets and the Sanger Institute; Rob Scott from GlaxoSmithKlein; and Jonathan Ives from the Centre for Ethics in Medicine.
-
-Also see above for details on a number of short courses in Australia, Brazil, Italy, South Africa and Cambridge, which were co-developed with colleagues from those regions.
 
 ## (iv) Postgraduate advising
 
@@ -154,14 +138,18 @@ postgrad %>%
 
 ## (vii) Major achievements in teaching administration
 
-**Anti-racism:** I co-lead the Special Interest Group on decolonising the curriculum in the Bristol Medical School. I am creating a framework by which course leads across the school can identify racial biases in their teaching methods and materials, work towards address them, and obtain independent course review from external peers. 
+**International short courses on statistical genetics:** I have organised, developed and delivered short courses (typically week-long, in collaboration with internal and/or external colleagues) to researchers at institutes in South Africa, Italy, Brazil and at the Wellcome Genome Centre in Cambridge.
 
-**Courses on my software:** I developed a course to teach researchers how to use my own software (MR-Base), with the course being heavily over-subscribed and gaining very positive feedback and increased usage of the software.
+**Genomic Data Science module:** I designed, organised and delivered a 20 credit module for medical students that involves teaching them programming and genomic data analysis from scratch. This has run for 4 years, and consistently gets very positive feedback, and the students achieve a high standard.
 
+**Anti-racism:** I co-lead the Special Interest Group of 11 group members on decolonising the curriculum in the Bristol Medical School. I am leading the creation of a framework by which course leads across the school can identify racial biases in their teaching methods and materials, work towards addressing them, and obtaining independent course review from external peers. The group meets approximately every two weeks, and I liaise with the University's central decolonising group regularly also.
+
+**MR-Base software course:** I developed a course to teach researchers how to use my own software (MR-Base), with the course being heavily over-subscribed and gaining very positive feedback and increased usage of the software.
 
 # Research and related administration
 
-I was awarded a Wellcome Trust Sir Henry Dale fellowship award in 2018. I have translated my background in quantitative genetics and high performance computing to genetic epidemiology research, resulting in the development of the MR-Base causal inference analytical platform and OpenGWAS data infrastructure. This software is used by researchers within the institute and around the world, has led directly to funding for five post-doctoral positions from three private companies (GSK, Biogen, CHDI). I currently lead or co-lead two major international collaborations: The GoDMC consortium comprising 56 cohorts analysing the genetics of DNA methylation; the OpenGWAS consortium that combines the resources of over 100 groups and consortia.
+My research lies at the interface between statistical genetics, causal inference and high performance computing. A major output that integrates these fields has been the development of the MR-Base causal inference analytical platform. This software is used by researchers within the institute and around the world, has led directly to funding for five post-doctoral positions from three private companies (GSK, Biogen, CHDI). I currently lead or co-lead two major international collaborations: The GoDMC consortium comprising 56 cohorts analysing the genetics of DNA methylation; the OpenGWAS consortium that combines the resources of over 100 groups and consortia.
+
 
 ## (i) Publications
 
@@ -194,7 +182,7 @@ convert_to_bib <- function(x)
 }
 ```
 
-Selected publications organised by category are listed below. Full publication list on google scholar: [https://scholar.google.com/citations?user=6fC0BYYAAAAJ&hl=en](https://scholar.google.ca/citations?hl=en&user=6fC0BYYAAAAJ).
+Selected publications organised by category are listed below. Full publication list on [google scholar](https://scholar.google.ca/citations?hl=en&user=6fC0BYYAAAAJ).
 
 - H-index: **`r h_index`**
 - i10-index: **`r i10_index`**
@@ -213,17 +201,6 @@ pubs %>%
 ```{r}
 pubs %>% 
   dplyr::filter(type == "review article") %>%
-  convert_to_bib()
-```
-
-
-**Academic Journal Papers (not refereed)**
-
-These papers are currently under review and are made publicly available on pre-print servers.
-
-```{r}
-pubs %>% 
-  dplyr::filter(type == "preprint") %>%
   convert_to_bib()
 ```
 
@@ -252,6 +229,8 @@ pubs %>%
 
 ## (iii) Research grants
 
+
+
 ```{r}
 grants <- read_csv(here::here("data", "grants.csv")) %>%
   mutate(start=as.Date(start, format=c("%d/%m/%Y")), end=as.Date(end, format=c("%d/%m/%Y"))) %>%
@@ -260,6 +239,12 @@ grants <- read_csv(here::here("data", "grants.csv")) %>%
 grant_totals <- grants %>% 
   group_by(role) %>% 
   summarise(n=n(), income=sum(amount * conversion), incomep = format(round(as.numeric(income), 2), nsmall=0, scientific=FALSE, big.mark=","))
+
+grant_totals_current <- grants %>% 
+  subset(., end > today()) %>%
+  group_by(role) %>% 
+  summarise(n=n(), income=sum(amount * conversion), incomep = format(round(as.numeric(income), 2), nsmall=0, scientific=FALSE, big.mark=","))
+
 
 grantsf <- grants %>% 
   mutate(n=1:nrow(grants)) %>%
@@ -270,20 +255,24 @@ grantsf <- grants %>%
       x, 
       tibble(n=x$n[1],
         why=paste(
-          c("Amount:", "Role:", "Dates:", "Proportion:"), 
-          c(paste(format(round(as.numeric(x$amount)), nsmall=0, scientific=FALSE, big.mark=","), x$currency), x$role,
-          paste(x$start, "to", x$end),
-          x$perc)
-        ),
+          "Amount: ", paste(format(round(as.numeric(x$amount)), nsmall=0, scientific=FALSE, big.mark=","), x$currency),
+          "; Role: ", x$role,
+          "; Dates: ", paste(x$start, "to", x$end),
+          "; Proportion: ", x$perc),
         when=x$awarded
       )
     )
   })
 ```
 
-Total income as PI, from `r subset(grant_totals, role=="PI")$n` grants: **`r subset(grant_totals, role=="PI")$incomep` GBP**
+Total income as PI, from `r subset(grant_totals, role=="PI")$n` grant(s): **`r subset(grant_totals, role=="PI")$incomep` GBP**
 
-Total income as CI, from `r subset(grant_totals, role=="Co-I")$n` grants: **`r subset(grant_totals, role=="Co-I")$incomep` GBP**
+Total income as CI, from `r subset(grant_totals, role=="Co-I")$n` grant(s): **`r subset(grant_totals, role=="Co-I")$incomep` GBP**
+
+Current income as PI, from `r subset(grant_totals_current, role=="PI")$n` grant(s): **`r subset(grant_totals_current, role=="PI")$incomep` GBP**
+
+Current income as CI, from `r subset(grant_totals_current, role=="Co-I")$n` grant(s): **`r subset(grant_totals_current, role=="Co-I")$incomep` GBP**
+
 
 ```{r}
 grantsf  %>%
@@ -323,7 +312,6 @@ read_csv(here::here("data", "degree_examination.csv")) %>%
   detailed_entries(what=what, where=where, with=who, when=when)
 ```
 
-\newpage
 
 #### Invited lectures (last 3 years)
 
@@ -348,16 +336,22 @@ read_csv(here::here("data", "research_management.csv")) %>%
 
 ## (i) Academic leadership in the discipline
 
+I orchestrate the collection and harmonisation of data across hundreds of international research groups through the OpenGWAS project. This data infrastructure is the largest of its kind, and routinely gets more than 2 million queries per week from all over the world. 
+
+I design analytical pipelines by unifying and developing statistical methods with researchers from multiple international groups. For example I developed the MR-Base software platform, which has now been cited nearly 1000 times since being published in 2018. I also developed the Genetics of DNA Methylation (GoDMC) analytical pipeline, which was recently diseminated to 36 groups around the world and resulted in a paper recently accepted in Nature Genetics. 
+
+I form part of a group coordinating the world's largest genetic data collection effort. The Early Disease Detection Research Project (EDDRP) will genotype 5 million individuals in the UK within the next 4 years and I am part of the genotype chip design committee which meets on a monthly basis.
+
 ```{r}
 academic_leadership <- read_csv(here::here("data", "academic_leadership.csv")) %>%
   mutate(where = as.character(where), why = as.character(why)) %>%
   arrange(desc(when)) %>%
   separate_why()
 
-academic_leadership %>%
-  filter(type == "international") %>%
-  arrange(desc(when)) %>%
-  detailed_entries(what=as.character(what), where=where, with=with, when=when, why=why)
+# academic_leadership %>%
+#   filter(type == "international") %>%
+#   arrange(desc(when)) %>%
+#   detailed_entries(what=as.character(what), where=where, with=with, when=when, why=why)
 ```
 
 ## (ii) Academic leadership in the University
@@ -396,7 +390,6 @@ academic_misc %>%
   brief_entries(what=what, when=when)
 ```
 
-
 ## (vi) Good citizenship
 
 ```{r}
@@ -404,7 +397,6 @@ academic_misc %>%
   filter(type=="citizenship") %>%
   brief_entries(what=what, when=when)
 ```
-
 
 # Future plans
 
