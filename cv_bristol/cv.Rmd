@@ -11,7 +11,7 @@ aboutme:
 date: "`r format(Sys.time(), '%B %Y')`"
 headcolor: "000000"
 output: vitae::awesomecv
-csl: "nature.csl"
+csl: "../resources/nature.csl"
 ---
 
 ```{r setup, include=FALSE}

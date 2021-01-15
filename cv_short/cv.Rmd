@@ -1,0 +1,191 @@
+---
+name: Gibran Hemani
+position: "Senior Research Fellow, University of Bristol"
+address: "8 Picton Mews, Bristol, BS6 5PB, United Kingdom"
+phone: "+44(0)7930951876"
+www: explodecomputer.com
+email: explodecomputer@gmail.com
+twitter: explodecomputer
+github: explodecomputer
+aboutme:
+date: "`r format(Sys.time(), '%B %Y')`"
+headcolor: "000000"
+output: vitae::awesomecv
+csl: "../resources/nature.csl"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, 
+                      warning = FALSE,
+                      message = FALSE)
+source("../scripts/install.R")
+
+separate_why <- function(x)
+{
+  x %>%
+    dplyr::mutate(why = strsplit(why, "\\. ")) %>%
+    tidyr::unnest(why)
+}
+```
+
+# Academic Qualifications
+
+```{r}
+read_csv(here("data", "education.csv")) %>%
+  detailed_entries(
+    when = glue("{start_date} to {end_date}"),
+    what = degree,
+    where = loc,
+    with = uni,
+    why = details
+)
+```
+
+# Employment
+
+```{r employment}
+read_csv(here("data", "jobs.csv")) %>%
+  detailed_entries(
+    what = role,
+    when = glue("{start_date} to {end_date}"),
+    with = company,
+    where = where,
+    why = details)
+```
+
+# Awards
+
+```{r awards}
+read_csv(here("data", "awards.csv")) %>%
+  detailed_entries(
+    with = what,
+    what = why,
+    when = when,
+    where = where
+)
+```
+
+# Publications
+
+```{r}
+load(here("data", "pubs.rdata"))
+convert_to_bib <- function(x)
+{
+  Encoding(x$author) <- "UTF-8"
+  x$author <- iconv(x$author, "UTF-8", "UTF-8", sub="")
+  tmpfile <- here("data", "pubs.bib")
+  tibble(
+    CATEGORY="ARTICLE",
+    BIBTEXKEY=x$pubid,
+    AUTHOR=
+      strsplit(x$author, split=", ") %>%
+      lapply(., function(i) {
+        stringr::str_split(i, " ", n=2) %>%
+        sapply(., function(j) {
+          paste(rev(j), collapse=", ")
+          }) %>%
+        gsub("al, et", "others", .)
+      }),
+    TITLE=x$title,
+    JOURNAL=x$journal,
+    NUMBER=x$number,
+    YEAR=x$year,
+    NOTE=x$info
+  ) %>% bib2df::df2bib(file=tmpfile)
+  bibliography_entries(tmpfile)
+}
+```
+
+Selected publications organised by category are listed below. Full publication list on [google scholar](https://scholar.google.ca/citations?hl=en&user=6fC0BYYAAAAJ).
+
+- H-index: **`r h_index`**
+- i10-index: **`r i10_index`**
+- Number of publications: **`r npubs`**
+
+**Academic journal papers (refereed)**
+
+```{r}
+pubs %>% 
+  dplyr::filter(type == "peer reviewed journal article") %>%
+  convert_to_bib()
+```
+
+**Review articles**
+
+```{r}
+pubs %>% 
+  dplyr::filter(type == "review article") %>%
+  convert_to_bib()
+```
+
+**Selected published open source software**
+
+```{r}
+software <- read_csv(here::here("data", "software.csv")) 
+bind_rows(
+  software %>% mutate(why=what),
+  software %>% mutate(why=where)
+) %>% 
+  arrange(desc(when), package) %>%
+  detailed_entries(what = package, when = when, why = why)
+```
+
+
+**Forthcoming publications**
+
+```{r}
+pubs %>% 
+  dplyr::filter(type == "forthcoming") %>%
+  convert_to_bib()
+```
+
+# Research grants
+
+```{r}
+grants <- read_csv(here::here("data", "grants.csv")) %>%
+  mutate(start=as.Date(start, format=c("%d/%m/%Y")), end=as.Date(end, format=c("%d/%m/%Y"))) %>%
+  arrange(desc(start))
+
+grant_totals <- grants %>% 
+  group_by(role) %>% 
+  summarise(n=n(), income=sum(amount * conversion), incomep = format(round(as.numeric(income), 2), nsmall=0, scientific=FALSE, big.mark=","))
+
+grant_totals_current <- grants %>% 
+  subset(., end > today()) %>%
+  group_by(role) %>% 
+  summarise(n=n(), income=sum(amount * conversion), incomep = format(round(as.numeric(income), 2), nsmall=0, scientific=FALSE, big.mark=","))
+
+
+grantsf <- grants %>% 
+  mutate(n=1:nrow(grants)) %>%
+  group_by(n) %>%
+  do({
+    x <- .
+    merge(
+      x, 
+      tibble(n=x$n[1],
+        why=paste(
+          "Amount: ", paste(format(round(as.numeric(x$amount)), nsmall=0, scientific=FALSE, big.mark=","), x$currency),
+          "; Role: ", x$role,
+          "; Dates: ", paste(x$start, "to", x$end),
+          "; Proportion: ", x$perc),
+        when=x$awarded
+      )
+    )
+  })
+
+grantsf  %>%
+  detailed_entries(with=title, why=why, when=when, what=funder)
+```
+
+
+# Invited talks (last 3 years)
+
+```{r}
+read_csv(here::here("data", "talks.csv")) %>% 
+  arrange(desc(when)) %>%
+  filter(when >= (now() %>% year() - 3)) %>%
+  arrange(desc(when)) %>%
+  detailed_entries(what=what, with=who, when=when, where=type, why=details)
+```
+
