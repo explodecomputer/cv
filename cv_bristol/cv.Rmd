@@ -247,8 +247,6 @@ spubs %>%
   convert_to_bib()
 ```
 
-\newpage
-
 ## (iii) Research grants
 
 
@@ -325,6 +323,8 @@ tibble(
   detailed_entries(what=what, when=when, why=why, with=with)
 ```
 
+\newpage
+
 ### Invitations for degree examinations
 
 ```{r}
@@ -343,6 +343,8 @@ read_csv(here::here("data", "talks.csv")) %>%
   arrange(desc(when)) %>%
   detailed_entries(what=what, with=who, when=when, where=type, why=details)
 ```
+
+\newpage
 
 ## (vi) Related administration
 
