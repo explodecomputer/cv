@@ -17,8 +17,8 @@ selected_pubs <- read_csv(here("data", "selected_pubs.csv")) %>%
       !is.na(note) ~ note, 
       is.na(note) ~ ""),
     info = case_when(
-      note == "" ~ paste0("Role: ", role),
-      TRUE ~ paste0("Role: ", role, ". ", note)
+      note == "" ~ paste0("Role: ", perc, "(", role, ")"),
+      TRUE ~ paste0("Role: ", perc, "(", role, "). ", note)
     )
   ) %>%
   select(-title)
