@@ -165,6 +165,22 @@ convert_to_bib <- function(x)
 {
   Encoding(x$author) <- "UTF-8"
   x$author <- iconv(x$author, "UTF-8", "UTF-8", sub="")
+
+  x$author <- sapply(x$author, function(string)
+  {
+    authors = trimws(unlist(strsplit(string, ",")))
+    format_author = function(author) {
+        words = trimws(unlist(strsplit(author, " ")))
+        lastname = words[length(words)]
+        first = words[!words %in% lastname]
+        first = gsub("\\B[a-z]", "", first, perl = TRUE)
+        first = paste(first, collapse = "")
+        trimws(paste(first, lastname))
+    }
+    authors = sapply(authors, format_author)
+    paste(authors, collapse = ", ")
+  })
+
   tmpfile <- here("data", "pubs.bib")
   tibble(
     CATEGORY="ARTICLE",
@@ -197,7 +213,7 @@ Selected publications organised by category are listed below. Full publication l
 **Academic journal papers (refereed)**
 
 ```{r}
-pubs %>% 
+spubs %>% 
   dplyr::filter(type == "peer reviewed journal article") %>%
   convert_to_bib()
 ```
@@ -205,7 +221,7 @@ pubs %>%
 **Review articles**
 
 ```{r}
-pubs %>% 
+spubs %>% 
   dplyr::filter(type == "review article") %>%
   convert_to_bib()
 ```
@@ -226,15 +242,14 @@ bind_rows(
 ## (ii) Forthcoming publications
 
 ```{r}
-pubs %>% 
+spubs %>% 
   dplyr::filter(type == "forthcoming") %>%
   convert_to_bib()
 ```
 
-
+\newpage
 
 ## (iii) Research grants
-
 
 
 ```{r}

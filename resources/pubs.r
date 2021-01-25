@@ -23,12 +23,12 @@ selected_pubs <- read_csv(here("data", "selected_pubs.csv")) %>%
   ) %>%
   select(-title)
 
-pubs <- inner_join(pubs, selected_pubs, by="pubid")
-for(i in 1:nrow(pubs))
+spubs <- inner_join(pubs, selected_pubs, by="pubid")
+for(i in 1:nrow(spubs))
 {
-  message(i, " of ", nrow(pubs))
+  message(i, " of ", nrow(spubs))
   Sys.sleep(2)
-  pubs$author[i] <- get_complete_authors(scholar_id, pubs$pubid[i])
+  spubs$author[i] <- get_complete_authors(scholar_id, spubs$pubid[i], initials=FALSE)
 }
 
 get_author_pos <- function(author, m=c("Hemani"))
@@ -39,8 +39,8 @@ get_author_pos <- function(author, m=c("Hemani"))
     })
 }
 
-pubs$authorpos <- get_author_pos(pubs$author, "Hemani")
-pubs <- pubs %>% mutate(
+spubs$authorpos <- get_author_pos(spubs$author, "Hemani")
+spubs <- spubs %>% mutate(
   authorpos = get_author_pos(author, "Hemani"),
   info = case_when(
     str_count(author, ",") >= 5 ~ paste0(info, ". Position: ", authorpos),
@@ -55,4 +55,4 @@ pubs <- pubs %>% mutate(
 scholar_profile <- scholar::get_profile(scholar_id)
 h_index <- scholar_profile$h_index
 i10_index <- scholar_profile$i10_index
-save(pubs, npubs, h_index, i10_index, scholar_id, file="../data/pubs.rdata")
+save(spubs, pubs, npubs, h_index, i10_index, scholar_id, file="../data/pubs.rdata")
