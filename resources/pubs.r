@@ -26,6 +26,8 @@ selected_pubs <- read_csv(here("data", "selected_pubs.csv")) %>%
 pubs <- inner_join(pubs, selected_pubs, by="pubid")
 for(i in 1:nrow(pubs))
 {
+  message(i, " of ", nrow(pubs))
+  Sys.sleep(2)
   pubs$author[i] <- get_complete_authors(scholar_id, pubs$pubid[i])
 }
 

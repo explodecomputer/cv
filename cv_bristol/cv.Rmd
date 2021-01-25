@@ -3,9 +3,8 @@ name: Gibran Hemani
 position: "Senior Research Fellow, University of Bristol"
 address: "8 Picton Mews, Bristol, BS6 5PB, United Kingdom"
 phone: "+44(0)7930951876"
-www: explodecomputer.com
-email: explodecomputer@gmail.com
-twitter: explodecomputer
+www: gibranhemani.com
+email: g.hemani@bristol.ac.uk
 github: explodecomputer
 aboutme:
 date: "`r format(Sys.time(), '%B %Y')`"
@@ -79,10 +78,12 @@ read_csv(here("data", "awards.csv")) %>%
 )
 ```
 
+\newpage
 
 # Teaching and related administration
 
-Though I have only had research-based academic appointments, I have found many opportunities to develop a variety of different teaching materials from my PhD to present. There has been a major shift towards using genetic data in epidemiological research over the last several years. My academic background in statistical genetics has created opportunities and demand for teaching in this field. I am particularly proud of my record of delivering courses on genetic epidemiology to participants who are under represented in genomic data science. In line with this I am also leading the Medical School's Anti-Racism special interest group in Decolonising the Curriculum.
+Over the course of my research career I have sought out opportunities to develop a variety of different teaching materials, starting during my PhD when I wrote and delivered a 2-day course on R programming for researchers at the Roslin Institute. I have a passion for teaching and since then I have taught on topics relating to genetics, statistics and programming to undergraduates across disciplines in medicine, biology and psychology. There has been a major shift towards using genetic data in epidemiological research over the last several years and my academic background in statistical genetics has created opportunities and substantial demand for teaching in this field at the post-graduate and life-long learning levels. I am particularly proud of my record of writing and delivering courses on genetic epidemiology to participants who are under-represented in genomic data science. In line with this I am also leading the Medical School's Anti-Racism special interest group in Decolonising the Curriculum.
+
 
 ## (i) Undergraduate and taught postgraduate (past 3 years)
 
@@ -106,9 +107,12 @@ teaching %>%
   detailed_entries(with=with, what = what, when = when, why = why, where=where)
 ```
 
+\newpage
+
 ## (iii) Innovatory units and teaching methods
 
 **Flipped classroom:** In the second year of the iBSc Genomic Medicine course I redesigned the R programming training section to be a flipped classroom, using online games for students to learn the basic principles of programming at home and the tutor led sessions as an opportunity to synthesise those skills into applied examples. The students were more adept at programming than in the previous year, and also more enthused about the subject. I transitioned the rest of the module to a flipped classroom in 2020 during the Covid-19 pandemic.
+
 
 ## (iv) Contribution to Life-long learning and continuing professional development courses
 
@@ -122,9 +126,11 @@ teaching %>%
 
 Developed external speaker programmes for iBSc medical students, involving Jeff Barrett from OpenTargets and the Sanger Institute; Rob Scott from GlaxoSmithKlein; and Jonathan Ives from the Centre for Ethics in Medicine.
 
+\newpage
+
 ## (iv) Postgraduate advising
 
-#### PhD Supervision
+### PhD Supervision
 
 ```{r}
 postgrad <- read_csv(here::here("data", "postgrad.csv")) %>% 
@@ -142,13 +148,13 @@ postgrad %>%
 
 **Genomic Data Science module:** I designed, organised and delivered a 20 credit module for medical students that involves teaching them programming and genomic data analysis from scratch. This has run for 4 years, and consistently gets very positive feedback, and the students achieve a high standard.
 
-**Anti-racism:** I co-lead the Special Interest Group of 11 group members on decolonising the curriculum in the Bristol Medical School. I am leading the creation of a framework by which course leads across the school can identify racial biases in their teaching methods and materials, work towards addressing them, and obtaining independent course review from external peers. The group meets approximately every two weeks, and I liaise with the University's central decolonising group regularly also.
+**Anti-racism:** I lead the Special Interest Group (11 members, fortnightly meetings) on decolonising the curriculum in the Bristol Medical School. We are developing an accreditation system that schedules a transparent process for course leads to work against. I also liaise with numerous related groups across the university.
 
 **MR-Base software course:** I developed a course to teach researchers how to use my own software (MR-Base), with the course being heavily over-subscribed and gaining very positive feedback and increased usage of the software.
 
 # Research and related administration
 
-My research lies at the interface between statistical genetics, causal inference and high performance computing. A major output that integrates these fields has been the development of the MR-Base causal inference analytical platform. This software is used by researchers within the institute and around the world, has led directly to funding for five post-doctoral positions from three private companies (GSK, Biogen, CHDI). I currently lead or co-lead two major international collaborations: The GoDMC consortium comprising 56 cohorts analysing the genetics of DNA methylation; the OpenGWAS consortium that combines the resources of over 100 groups and consortia.
+During my PhD I developed statistical and computational methods to detect genetic interactions influencing complex traits. This work led to my first post-doctoral position that expanded my work into determining genetic architectures of complex disease, and developing expertise in handling high dimensional genomic data. My current research lies at the interface between statistical genetics, causal inference and high performance computing. A major output that integrates these fields has been the development of the MR-Base causal inference analytical platform. This software is used by researchers globally, has led directly to funding for five post-doctoral positions from three private companies (GSK, Biogen, CHDI). I currently lead or co-lead two major international collaborations: The GoDMC consortium comprising 56 cohorts analysing the genetics of DNA methylation; the OpenGWAS consortium that combines the resources of over 100 groups and consortia. I synthesise these activities under my current fellowship which aims to construct a map of causal relationships across genotypes and phenotypes, and to use that map in diverse ways, for example to improve our understanding of human evolutionary processes, and to improve the prediction of viable drug targets for disease.
 
 
 ## (i) Publications
@@ -281,7 +287,7 @@ grantsf  %>%
 
 ## (iv) Indications of external recognition
 
-#### Editorships
+### Editorships
 
 ```{r}
 tibble(
@@ -292,7 +298,7 @@ tibble(
   detailed_entries(what=what, when=when, with=with)
 ```
 
-#### Appointment to national or international bodies
+### Appointment to national or international bodies
 
 ```{r}
 tibble(
@@ -304,7 +310,7 @@ tibble(
   detailed_entries(what=what, when=when, why=why, with=with)
 ```
 
-#### Invitations for degree examinations
+### Invitations for degree examinations
 
 ```{r}
 read_csv(here::here("data", "degree_examination.csv")) %>%
@@ -313,7 +319,7 @@ read_csv(here::here("data", "degree_examination.csv")) %>%
 ```
 
 
-#### Invited lectures (last 3 years)
+### Invited lectures (last 3 years)
 
 ```{r}
 read_csv(here::here("data", "talks.csv")) %>% 
@@ -331,6 +337,8 @@ read_csv(here::here("data", "research_management.csv")) %>%
   arrange(desc(when)) %>%
   detailed_entries(what=with, where=where, with=what, when=when, why=why)
 ```
+
+\newpage
 
 # Academic leadership and citizenship
 
@@ -354,6 +362,7 @@ academic_leadership <- read_csv(here::here("data", "academic_leadership.csv")) %
 #   detailed_entries(what=as.character(what), where=where, with=with, when=when, why=why)
 ```
 
+
 ## (ii) Academic leadership in the University
 
 ```{r}
@@ -373,6 +382,8 @@ academic_misc %>%
   filter(type=="professional") %>%
   brief_entries(what=what, when=when)
 ```
+
+\newpage
 
 ## (iv) Contributions to society
 
