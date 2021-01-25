@@ -457,7 +457,7 @@
         {}%
         {%
           \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-          \faEnvelope\acvHeaderIconSep\@email%
+          \faEnvelope\acvHeaderIconSep\href{mailto:g.hemani@bristol.ac.uk}{g.hemani@bristol.ac.uk}%
         }%
       \ifthenelse{\isundefined{\@homepage}}%
         {}%
