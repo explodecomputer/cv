@@ -218,6 +218,8 @@ spubs %>%
   convert_to_bib()
 ```
 
+\newpage
+
 **Review articles**
 
 ```{r}
@@ -238,6 +240,7 @@ bind_rows(
   detailed_entries(what = package, when = when, why = why)
 ```
 
+\newpage
 
 ## (ii) Forthcoming publications
 
@@ -323,8 +326,6 @@ tibble(
   detailed_entries(what=what, when=when, why=why, with=with)
 ```
 
-\newpage
-
 ### Invitations for degree examinations
 
 ```{r}
@@ -344,7 +345,6 @@ read_csv(here::here("data", "talks.csv")) %>%
   detailed_entries(what=what, with=who, when=when, where=type, why=details)
 ```
 
-\newpage
 
 ## (vi) Related administration
 
@@ -354,8 +354,6 @@ read_csv(here::here("data", "research_management.csv")) %>%
   arrange(desc(when)) %>%
   detailed_entries(what=with, where=where, with=what, when=when, why=why)
 ```
-
-\newpage
 
 # Academic leadership and citizenship
 
@@ -389,6 +387,8 @@ academic_leadership %>%
   detailed_entries(what=as.character(what), where=where, with=with, when=when, why=why)
 ```
 
+\newpage
+
 ## (iii) Professional activities outside the University
 
 ```{r}
@@ -399,8 +399,6 @@ academic_misc %>%
   filter(type=="professional") %>%
   brief_entries(what=what, when=when)
 ```
-
-\newpage
 
 ## (iv) Contributions to society
 
