@@ -198,7 +198,7 @@ convert_to_bib <- function(x)
     JOURNAL=x$journal,
     NUMBER=x$number,
     YEAR=x$year,
-    NOTE=x$info
+    NOTE=gsub("%", "\\\\%", x$info)
   ) %>% bib2df::df2bib(file=tmpfile)
   bibliography_entries(tmpfile)
 }
