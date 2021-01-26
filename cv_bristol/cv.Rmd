@@ -208,7 +208,7 @@ Selected publications organised by category are listed below. Full publication l
 
 - H-index: **`r h_index`**
 - i10-index: **`r i10_index`**
-- Number of publications: **`r npubs`**
+- Number of publications: **`r nrow(pubs)`**
 
 **Academic journal papers (refereed)**
 
@@ -359,11 +359,11 @@ read_csv(here::here("data", "research_management.csv")) %>%
 
 ## (i) Academic leadership in the discipline
 
-I orchestrate the collection and harmonisation of data across hundreds of international research groups through the OpenGWAS project. This data infrastructure is the largest of its kind, and routinely gets more than 2 million queries per week from all over the world. 
+I orchestrate the collection and harmonisation of summary data from genome-wide association studies (GWAS) across hundreds of international research groups through the OpenGWAS project. GWAS summary data is vitally important to a wide range of genetic and epidemiological research activities, and the OpenGWAS infrastructure is the largest of its kind comprising approximately 125 billion genetic associations. It has more than 1000 unique users a month and receives more than 2 million queries per week from all over the world. 
 
 I design analytical pipelines by unifying and developing statistical methods with researchers from multiple international groups. For example I developed the MR-Base software platform, which has now been cited nearly 1000 times since being published in 2018. I also developed the Genetics of DNA Methylation (GoDMC) analytical pipeline, which was recently diseminated to 36 groups around the world and resulted in a paper recently accepted in Nature Genetics. 
 
-I form part of a group coordinating the world's largest genetic data collection effort. The Early Disease Detection Research Project (EDDRP) will genotype 5 million individuals in the UK within the next 4 years and I am part of the genotype chip design committee which meets on a monthly basis.
+I form part of a group coordinating the world's largest genetic data collection effort. The Our Future Health Project will genotype 5 million individuals in the UK within the next 4 years and I am part of the genotype chip design committee which meets on a monthly basis.
 
 ```{r}
 academic_leadership <- read_csv(here::here("data", "academic_leadership.csv")) %>%
@@ -379,6 +379,7 @@ academic_leadership <- read_csv(here::here("data", "academic_leadership.csv")) %
 
 
 ## (ii) Academic leadership in the University
+
 
 ```{r}
 academic_leadership %>%

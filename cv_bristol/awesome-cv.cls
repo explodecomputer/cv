@@ -218,17 +218,17 @@
 \newcommand*{\descriptionstyle}[1]{{\fontsize{11pt}{1em}\bodyfontlight\normalfont\color{text} #1}}
 
 % For elements of subentry
-\newcommand*{\subentrytitlestyle}[1]{{\fontsize{8pt}{1em}\bodyfont\mdseries\color{darktext} #1}}
-\newcommand*{\subentrypositionstyle}[1]{{\fontsize{7pt}{1em}\bodyfont\scshape\color{darktext} #1}}
-\newcommand*{\subentrydatestyle}[1]{{\fontsize{7pt}{1em}\bodyfontlight\slshape\color{darktext} #1}}
-\newcommand*{\subentrylocationstyle}[1]{{\fontsize{7pt}{1em}\bodyfontlight\slshape\color{awesome} #1}}
-\newcommand*{\subdescriptionstyle}[1]{{\fontsize{8pt}{1em}\bodyfontlight\upshape\color{text} #1}}
+\newcommand*{\subentrytitlestyle}[1]{{\fontsize{12pt}{1em}\bodyfont\mdseries\color{darktext} #1}}
+\newcommand*{\subentrypositionstyle}[1]{{\fontsize{12pt}{1em}\bodyfont\scshape\color{darktext} #1}}
+\newcommand*{\subentrydatestyle}[1]{{\fontsize{12pt}{1em}\bodyfontlight\slshape\color{darktext} #1}}
+\newcommand*{\subentrylocationstyle}[1]{{\fontsize{12pt}{1em}\bodyfontlight\slshape\color{awesome} #1}}
+\newcommand*{\subdescriptionstyle}[1]{{\fontsize{12pt}{1em}\bodyfontlight\upshape\color{text} #1}}
 
 % For elements of honor
-\newcommand*{\honortitlestyle}[1]{{\fontsize{9pt}{1em}\bodyfont\color{darktext} #1}}
-\newcommand*{\honorpositionstyle}[1]{{\fontsize{9pt}{1em}\bodyfont\bfseries\color{darktext} #1}}
-\newcommand*{\honordatestyle}[1]{{\fontsize{9pt}{1em}\bodyfont\color{darktext} #1}}
-\newcommand*{\honorlocationstyle}[1]{{\fontsize{9pt}{1em}\bodyfontlight\slshape\color{awesome} #1}}
+\newcommand*{\honortitlestyle}[1]{{\fontsize{12pt}{1em}\bodyfont\color{darktext} #1}}
+\newcommand*{\honorpositionstyle}[1]{{\fontsize{12pt}{1em}\bodyfont\bfseries\color{darktext} #1}}
+\newcommand*{\honordatestyle}[1]{{\fontsize{12pt}{1em}\bodyfont\color{darktext} #1}}
+\newcommand*{\honorlocationstyle}[1]{{\fontsize{12pt}{1em}\bodyfontlight\slshape\color{awesome} #1}}
 
 % For elements of skill
 \newcommand*{\skilltypestyle}[1]{{\fontsize{10pt}{1em}\bodyfont\bfseries\color{darktext} #1}}

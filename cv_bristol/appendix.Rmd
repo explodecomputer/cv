@@ -1,0 +1,82 @@
+---
+name: Gibran Hemani
+position: "Publication appendix"
+phone: "+44(0)7930951876"
+www: gibranhemani.com
+email: g.hemani@bristol.ac.uk
+github: explodecomputer
+aboutme:
+date: "`r format(Sys.time(), '%B %Y')`"
+headcolor: "000000"
+output: vitae::awesomecv
+csl: "../resources/nature.csl"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, 
+                      warning = FALSE,
+                      message = FALSE)
+source("../scripts/install.R")
+
+separate_why <- function(x)
+{
+  x %>%
+    dplyr::mutate(why = strsplit(why, "\\. ")) %>%
+    tidyr::unnest(why)
+}
+```
+
+```{r}
+load(here("data", "pubs.rdata"))
+convert_to_bib <- function(x)
+{
+  Encoding(x$author) <- "UTF-8"
+  x$author <- iconv(x$author, "UTF-8", "UTF-8", sub="")
+
+  x$author <- sapply(x$author, function(string)
+  {
+    authors = trimws(unlist(strsplit(string, ",")))
+    format_author = function(author) {
+        words = trimws(unlist(strsplit(author, " ")))
+        lastname = words[length(words)]
+        first = words[!words %in% lastname]
+        first = gsub("\\B[a-z]", "", first, perl = TRUE)
+        first = paste(first, collapse = "")
+        trimws(paste(first, lastname))
+    }
+    authors = sapply(authors, format_author)
+    paste(authors, collapse = ", ")
+  })
+
+  tmpfile <- here("data", "pubs.bib")
+  tibble(
+    CATEGORY="ARTICLE",
+    BIBTEXKEY=x$pubid,
+    AUTHOR=
+      strsplit(x$author, split=", ") %>%
+      lapply(., function(i) {
+        stringr::str_split(i, " ", n=2) %>%
+        sapply(., function(j) {
+          paste(rev(j), collapse=", ")
+          }) %>%
+        gsub("al, e", "others", .)
+      }),
+    TITLE=x$title,
+    JOURNAL=x$journal,
+    NUMBER=x$number,
+    YEAR=x$year
+  ) %>% bib2df::df2bib(file=tmpfile)
+  bibliography_entries(tmpfile)
+}
+```
+
+
+Full publication list based on archive at [google scholar](https://scholar.google.ca/citations?hl=en&user=6fC0BYYAAAAJ).
+
+- H-index: **`r h_index`**
+- i10-index: **`r i10_index`**
+
+```{r}
+pubs %>% 
+  convert_to_bib()
+```
