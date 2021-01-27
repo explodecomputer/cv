@@ -424,6 +424,7 @@ academic_misc %>%
   filter(type=="citizenship") %>%
   brief_entries(what=what, when=when)
 ```
+\newpage
 
 # Future plans
 
