@@ -1,7 +1,6 @@
 ---
 name: Gibran Hemani
 position: "Senior Research Fellow, University of Bristol"
-address: "8 Picton Mews, Bristol, BS6 5PB, United Kingdom"
 phone: "+44(0)7930951876"
 www: gibranhemani.com
 email: g.hemani@bristol.ac.uk
