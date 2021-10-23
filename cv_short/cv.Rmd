@@ -1,10 +1,9 @@
 ---
 name: Gibran Hemani
-position: "Senior Research Fellow, University of Bristol"
-address: "8 Picton Mews, Bristol, BS6 5PB, United Kingdom"
+position: "Associate Professor in Statistical Genetics, University of Bristol"
 phone: "+44(0)7930951876"
 www: explodecomputer.com
-email: explodecomputer@gmail.com
+email: g.hemani@bristol.ac.uk
 twitter: explodecomputer
 github: explodecomputer
 aboutme:
@@ -31,7 +30,7 @@ separate_why <- function(x)
 # Academic Qualifications
 
 ```{r}
-read_csv(here("data", "education.csv")) %>%
+read_csv(here("data", "education.csv"))[-1,] %>%
   detailed_entries(
     when = glue("{start_date} to {end_date}"),
     what = degree,
@@ -51,18 +50,6 @@ read_csv(here("data", "jobs.csv")) %>%
     with = company,
     where = where,
     why = details)
-```
-
-# Awards
-
-```{r awards}
-read_csv(here("data", "awards.csv")) %>%
-  detailed_entries(
-    with = what,
-    what = why,
-    when = when,
-    where = where
-)
 ```
 
 # Publications
@@ -90,22 +77,18 @@ convert_to_bib <- function(x)
     JOURNAL=x$journal,
     NUMBER=x$number,
     YEAR=x$year,
-    NOTE=x$info
+    NOTE=paste0("[", x$pos, "]")
   ) %>% bib2df::df2bib(file=tmpfile)
   bibliography_entries(tmpfile)
 }
 ```
 
-Selected publications organised by category are listed below. Full publication list on [google scholar](https://scholar.google.ca/citations?hl=en&user=6fC0BYYAAAAJ).
-
-- H-index: **`r h_index`**
-- i10-index: **`r i10_index`**
-- Number of publications: **`r npubs`**
+Selected publications organised by category are listed below. Full publication list on [google scholar](https://scholar.google.ca/citations?hl=en&user=6fC0BYYAAAAJ). H-index: **`r h_index`**
 
 **Academic journal papers (refereed)**
 
 ```{r}
-pubs %>% 
+spubs %>% 
   dplyr::filter(type == "peer reviewed journal article") %>%
   convert_to_bib()
 ```
@@ -113,29 +96,8 @@ pubs %>%
 **Review articles**
 
 ```{r}
-pubs %>% 
+spubs %>% 
   dplyr::filter(type == "review article") %>%
-  convert_to_bib()
-```
-
-**Selected published open source software**
-
-```{r}
-software <- read_csv(here::here("data", "software.csv")) 
-bind_rows(
-  software %>% mutate(why=what),
-  software %>% mutate(why=where)
-) %>% 
-  arrange(desc(when), package) %>%
-  detailed_entries(what = package, when = when, why = why)
-```
-
-
-**Forthcoming publications**
-
-```{r}
-pubs %>% 
-  dplyr::filter(type == "forthcoming") %>%
   convert_to_bib()
 ```
 
@@ -176,16 +138,5 @@ grantsf <- grants %>%
 
 grantsf  %>%
   detailed_entries(with=title, why=why, when=when, what=funder)
-```
-
-
-# Invited talks (last 3 years)
-
-```{r}
-read_csv(here::here("data", "talks.csv")) %>% 
-  arrange(desc(when)) %>%
-  filter(when >= (now() %>% year() - 3)) %>%
-  arrange(desc(when)) %>%
-  detailed_entries(what=what, with=who, when=when, where=type, why=details)
 ```
 
