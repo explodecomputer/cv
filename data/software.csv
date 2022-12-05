@@ -9,3 +9,5 @@ USS pension model,Web-app for projected pensions across different valuations,201
 MR-TRYX,Exploiting horizontal pleiotropy in Mendelian randomization,2019,https://explodecomputer.github.io/tryx/
 gctaPower,Power calculations for genomic REML analysis,2013,https://shiny.cnsgenomics.com/gctaPower/
 simulateGP,Simulation methods for genotype-phenotype associations,2016,https://explodecomputer.github.io/simulateGP/
+CAMERA,Cross-Ancestry Mendelian Randomisation R package,2022,https://github.com/yoonsucho/CAMERA
+babytime,R package to calculate costs and scheduling for people going on shared parental leave,2018,https://github.com/explodecomputer/shared-parental-leave

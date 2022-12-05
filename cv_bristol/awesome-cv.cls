@@ -85,6 +85,7 @@
 \RequirePackage{parskip}
 % Needed to deal hyperlink
 \RequirePackage[unicode]{hyperref}
+\RequirePackage{ulem}
 
 \definecolor{darkblue}{HTML}{0000EE}
 
@@ -626,11 +627,11 @@
 % Define an environment for cvhonor
 \newenvironment{cvhonors}{%
   \vspace{\acvSectionContentTopSkip}
-  \vspace{-2mm}
+  \vspace{-6mm}
   \begin{center}
     \setlength\tabcolsep{0pt}
-    \setlength{\extrarowheight}{0pt}
-    \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} C{1.5cm} L{\textwidth - 4.0cm} R{2.5cm}}
+    \setlength{\extrarowheight}{8pt}
+    \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{2.5cm} L{\textwidth - 2.5cm} R{0cm}}
 }{%
     \end{tabular*}
   \end{center}

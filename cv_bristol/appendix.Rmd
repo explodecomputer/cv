@@ -26,13 +26,14 @@ separate_why <- function(x)
 }
 ```
 
+
 ```{r}
 load(here("data", "pubs.rdata"))
 convert_to_bib <- function(x)
 {
   Encoding(x$author) <- "UTF-8"
   x$author <- iconv(x$author, "UTF-8", "UTF-8", sub="")
-
+  x$pubid <- gsub("-", "", x$pubid)
   x$author <- sapply(x$author, function(string)
   {
     authors = trimws(unlist(strsplit(string, ",")))

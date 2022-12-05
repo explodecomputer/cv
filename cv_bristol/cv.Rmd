@@ -8,7 +8,9 @@ github: explodecomputer
 aboutme:
 date: "`r format(Sys.time(), '%B %Y')`"
 headcolor: "000000"
-output: vitae::awesomecv
+output:
+  vitae::awesomecv:
+    keep_tex: true
 csl: "../resources/nature.csl"
 ---
 
@@ -81,8 +83,7 @@ read_csv(here("data", "awards.csv")) %>%
 
 # Teaching and related administration
 
-Over the course of my research career I have sought out opportunities to develop a variety of different teaching materials, starting during my PhD when I wrote and delivered a 2-day course on R programming for researchers at the Roslin Institute. I have a passion for teaching and since then I have taught on topics relating to genetics, statistics and programming to undergraduates across disciplines in medicine, biology and psychology. There has been a major shift towards using genetic data in epidemiological research over the last several years and my academic background in statistical genetics has created opportunities and substantial demand for teaching in this field at the post-graduate and life-long learning levels. I am particularly proud of my record of writing and delivering courses on genetic epidemiology to participants who are under-represented in genomic data science. In line with this I am also leading the Medical School's Anti-Racism special interest group in Decolonising the Curriculum.
-
+The teaching-research nexus has been central to my career, starting during my PhDz when I wrote and delivered a 2-day course on R programming for researchers at the Roslin Institute. Since then I have taught on topics relating to genetics, statistics and programming to undergraduates across disciplines in medicine, biology and psychology. There has been a major shift towards using genetic data in epidemiological research over the last several years and my academic background in statistical genetics has created opportunities and substantial demand for teaching in this field at the post-graduate and life-long learning levels. I am particularly proud of my record of writing and delivering courses on genetic epidemiology to participants who are under-represented in genomic data science. In line with this I am also co-leading the BMS Decolonising the Curriculum group, which is now piloting a curriculum review framework that we developed for Bristol Medical School.
 
 ## (i) Undergraduate and taught postgraduate (past 3 years)
 
@@ -112,7 +113,6 @@ teaching %>%
 
 **Flipped classroom:** In the second year of the iBSc Genomic Medicine course I redesigned the R programming training section to be a flipped classroom, using online games for students to learn the basic principles of programming at home and the tutor led sessions as an opportunity to synthesise those skills into applied examples. The students were more adept at programming than in the previous year, and also more enthused about the subject. I transitioned the rest of the module to a flipped classroom in 2020 during the Covid-19 pandemic.
 
-
 ## (iv) Contribution to Life-long learning and continuing professional development courses
 
 ```{r}
@@ -128,8 +128,6 @@ Developed external speaker programmes for iBSc medical students, involving Jeff 
 \newpage
 
 ## (iv) Postgraduate advising
-
-### PhD Supervision
 
 ```{r}
 postgrad <- read_csv(here::here("data", "postgrad.csv")) %>% 
@@ -147,14 +145,13 @@ postgrad %>%
 
 **Genomic Data Science module:** I designed, organised and delivered a 20 credit module for medical students that involves teaching them programming and genomic data analysis from scratch. This has run for 4 years, and consistently gets very positive feedback, and the students achieve a high standard.
 
-**Anti-racism:** I lead the Special Interest Group (11 members, fortnightly meetings) on decolonising the curriculum in the Bristol Medical School. We are developing an accreditation system that schedules a transparent process for course leads to work against. I also liaise with numerous related groups across the university.
+**Decolonising the curriculum:** I lead the Medical Anti-Racism Taskforce Special Interest Group on decolonising the curriculum in the Bristol Medical School (11 members). We are developing a curriculum review framework that is now being piloted in five modules across the school (http://decolbms.org.uk). I also liaise with numerous related groups across the university.
 
 **MR-Base software course:** I developed a course to teach researchers how to use my own software (MR-Base), with the course being heavily over-subscribed and gaining very positive feedback and increased usage of the software.
 
 # Research and related administration
 
-During my PhD I developed statistical and computational methods to detect genetic interactions influencing complex traits. This work led to my first post-doctoral position that expanded my work into determining genetic architectures of complex disease, and developing expertise in handling high dimensional genomic data. My current research lies at the interface between statistical genetics, causal inference and high performance computing. A major output that integrates these fields has been the development of the MR-Base causal inference analytical platform. This software is used by researchers globally, has led directly to funding for five post-doctoral positions from three private companies (GSK, Biogen, CHDI). I currently lead or co-lead two major international collaborations: The GoDMC consortium comprising 56 cohorts analysing the genetics of DNA methylation; the OpenGWAS consortium that combines the resources of over 100 groups and consortia. I synthesise these activities under my current fellowship which aims to construct a map of causal relationships across genotypes and phenotypes, and to use that map in diverse ways, for example to improve our understanding of human evolutionary processes, and to improve the prediction of viable drug targets for disease.
-
+During my PhD I developed statistical and computational methods to detect genetic interactions influencing complex traits. This work led to my first post-doctoral position that expanded my work into determining genetic architectures of complex disease, and developing expertise in handling high dimensional genomic data. My fellowship work lies at the interface between statistical genetics, causal inference and high performance computing. A major output that integrates these fields has been the development of the MR-Base and OpenGWAS causal inference analytical platform. These software platforms are used by researchers globally and has led directly to funding for five post-doctoral positions from three private companies (GSK, Biogen, CHDI). I currently lead or co-lead three major international collaborations. These activities will continue and expand in 2023 as co-lead of the Mendelian randomisation programme in MRC IEU 3.0.
 
 ## (i) Publications
 
@@ -164,7 +161,7 @@ convert_to_bib <- function(x)
 {
   Encoding(x$author) <- "UTF-8"
   x$author <- iconv(x$author, "UTF-8", "UTF-8", sub="")
-
+  x$pubid <- gsub("-", "", x$pubid)
   x$author <- sapply(x$author, function(string)
   {
     authors = trimws(unlist(strsplit(string, ",")))
@@ -209,7 +206,16 @@ Selected publications organised by category are listed below. Full publication l
 - i10-index: **`r i10_index`**
 - Number of publications: **`r nrow(pubs)`**
 
-**Academic journal papers (refereed)**
+### Chapters in Edited Books
+
+```{r}
+spubs %>% 
+  dplyr::filter(type == "book chapter") %>%
+  convert_to_bib()
+```
+
+
+### Academic journal papers (refereed)
 
 ```{r}
 spubs %>% 
@@ -217,9 +223,7 @@ spubs %>%
   convert_to_bib()
 ```
 
-\newpage
-
-**Review articles**
+### Review articles
 
 ```{r}
 spubs %>% 
@@ -227,7 +231,9 @@ spubs %>%
   convert_to_bib()
 ```
 
-**Selected published open source software**
+\newpage
+
+### Selected published open source software
 
 ```{r}
 software <- read_csv(here::here("data", "software.csv")) 
@@ -245,12 +251,11 @@ bind_rows(
 
 ```{r}
 spubs %>% 
-  dplyr::filter(type == "forthcoming") %>%
+  dplyr::filter(type == "preprint") %>%
   convert_to_bib()
 ```
 
 ## (iii) Research grants
-
 
 ```{r}
 grants <- read_csv(here::here("data", "grants.csv")) %>%
@@ -305,24 +310,17 @@ grantsf  %>%
 ### Editorships
 
 ```{r}
-tibble(
-  with="PLoS Computational Biology",
-  what="Invited guest editor",
-  when="2017"
-) %>%
+read_csv(here::here("data", "editorships.csv")) %>%
+  arrange(desc(when)) %>%
   detailed_entries(what=what, when=when, with=with)
 ```
 
 ### Appointment to national or international bodies
 
 ```{r}
-tibble(
-  with="Early Disease Detection Research Project",
-  what="Member of chip design committee",
-  when="2019",
-  why="Invitation to a committee for designing the genotyping array for the Early Disease Detection Research Project, which will genotype 5 million UK participants by 2024"
-) %>%
-  detailed_entries(what=what, when=when, why=why, with=with)
+read_csv(here::here("data", "bodies.csv")) %>%
+  arrange(desc(when)) %>%
+  detailed_entries(what=what, when=when, with=with)
 ```
 
 ### Invitations for degree examinations
@@ -333,6 +331,7 @@ read_csv(here::here("data", "degree_examination.csv")) %>%
   detailed_entries(what=what, where=where, with=who, when=when)
 ```
 
+\newpage
 
 ### Invited lectures (last 3 years)
 
@@ -343,7 +342,6 @@ read_csv(here::here("data", "talks.csv")) %>%
   arrange(desc(when)) %>%
   detailed_entries(what=what, with=who, when=when, where=type, why=details)
 ```
-
 
 ## (vi) Related administration
 
@@ -360,9 +358,11 @@ read_csv(here::here("data", "research_management.csv")) %>%
 
 I orchestrate the collection and harmonisation of summary data from genome-wide association studies (GWAS) across hundreds of international research groups through the OpenGWAS project. GWAS summary data is vitally important to a wide range of genetic and epidemiological research activities, and the OpenGWAS infrastructure is the largest of its kind comprising approximately 125 billion genetic associations. It has more than 1000 unique users a month and receives more than 2 million queries per week from all over the world. 
 
-I design analytical pipelines by unifying and developing statistical methods with researchers from multiple international groups. For example I developed the MR-Base software platform, which has now been cited nearly 1000 times since being published in 2018. I also developed the Genetics of DNA Methylation (GoDMC) analytical pipeline, which was recently diseminated to 36 groups around the world and resulted in a paper recently accepted in Nature Genetics. 
+I design analytical pipelines by unifying and developing statistical methods with researchers from multiple international groups. For example I developed the MR-Base software platform, which has now been cited over 2200 times since being published in 2018. 
 
-I form part of a group coordinating the world's largest genetic data collection effort. The Our Future Health Project will genotype 5 million individuals in the UK within the next 4 years and I am part of the genotype chip design committee which meets on a monthly basis.
+I co-lead three international collaborative research efforts: the GoDMC consortium comprising 56 cohorts analysing the genetics of DNA methylation; the OpenGWAS consortium that combines the resources of over 100 groups and consortia; and the Within-Families consortium which brings together 21 family cohorts with genetic and phenotypic data for improved genetic association meta-analyses
+
+I contributed to the design of the Our Future Health Project, which will genotype 5 million individuals in the UK, as a member of the chip design committee and as an expert reviewer in the procurement stage of the project.
 
 ```{r}
 academic_leadership <- read_csv(here::here("data", "academic_leadership.csv")) %>%
@@ -376,9 +376,9 @@ academic_leadership <- read_csv(here::here("data", "academic_leadership.csv")) %
 #   detailed_entries(what=as.character(what), where=where, with=with, when=when, why=why)
 ```
 
+\newpage
 
 ## (ii) Academic leadership in the University
-
 
 ```{r}
 academic_leadership %>%
@@ -386,8 +386,6 @@ academic_leadership %>%
   arrange(desc(when)) %>%
   detailed_entries(what=as.character(what), where=where, with=with, when=when, why=why)
 ```
-
-\newpage
 
 ## (iii) Professional activities outside the University
 
@@ -399,6 +397,8 @@ academic_misc %>%
   filter(type=="professional") %>%
   brief_entries(what=what, when=when)
 ```
+
+\newpage
 
 ## (iv) Contributions to society
 
@@ -423,13 +423,13 @@ academic_misc %>%
   filter(type=="citizenship") %>%
   brief_entries(what=what, when=when)
 ```
-\newpage
 
 # Future plans
 
-My fellowship is focused on implementing causal inference on a phenome-wide scale, creating a graph of the causal estimates of every phenotype against every other phenotype. I will create collaborations within the University and externally with experts in artificial intelligence, to explore new ways to exploit this graph for biological understanding and medical applications. I will use my causal graph to develop new ways to engage with the public, exploring how perceived ideas of medical interventions would shape future trajectories of population disease burden.
+I am committed to grow as an academic by understanding, refining and improving the impact of my work.
 
-I plan to develop a new professional development course that guides junior researchers and post-graduate stu- dents through best practices in code and data management and reproducible digital research.
+**Teaching**: I plan to develop a new professional development course that guides junior researchers and post-graduate students through best practices in code and data management and reproducible digital research. This reflects an important direction for me, of building a teaching-research nexus which I will continue to explore in my decolonisation activities and contributions to life-long learning courses.
 
-Through leading the special interest group on decolonising the curriculum, my goal is to develop a method of acreditation for courses across the medical school to introspectively examine potential biases in their teaching materials, identify ways of addressing them, and seek external review of proposed changes. This is a project of crucial importance for equiping the graduates and trainees in redressing biases that continue to incur health inequalities between ethnic groups.
+**Administration**: Team science is key to how I work, and though I have had a number of opportunities to lead teams thus far, I will seek opportunities to build my skills in this area, in terms of best serving the projects and people involved.
 
+**Research**: I co-developed an extensive research plan for the next 5 years of the IEU relating to method development for causal inference and application to the ever changing landscape of genetic and genomic data. However, the structure of MRC units will change after this period, towards one which appears to be more goal oriented around applied research, and on a much longer time horizon than my work has previously worked towards. I will spend this time building ideas and plans for this next phase. I am interested in integrating my decolonisation work, for example by understanding how public and patient involvement may operate with the new wave of deep learning approaches that are yet to make a large impact in participatory genetic epidemiology.
