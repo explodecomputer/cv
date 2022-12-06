@@ -42,7 +42,6 @@
 \ProcessOptions\relax
 \LoadClass{article}
 
-
   \renewcommand{\baselinestretch}{1.2}
 
 %-------------------------------------------------------------------------------
@@ -122,10 +121,10 @@
 % Remove head rule
 \renewcommand{\headrulewidth}{0pt}
 % Clear all header & footer fields
-\fancyhf{}
+% \fancyhf{}
 % Enable if you want to make header or footer using fancyhdr
 \pagestyle{fancy}
-
+\pagenumbering{arabic}
 
 %-------------------------------------------------------------------------------
 %                Configuration for colors
@@ -205,7 +204,7 @@
 \newcommand*{\headeraddressstyle}[1]{{\fontsize{10pt}{1em}\bodyfont\scshape\color{graytext} #1}}
 \newcommand*{\headersocialstyle}[1]{{\fontsize{10pt}{1em}\headerfont\color{text} #1}}
 \newcommand*{\headerquotestyle}[1]{{\fontsize{9pt}{1em}\bodyfont\itshape\color{darktext} #1}}
-\newcommand*{\footerstyle}[1]{{\fontsize{8pt}{1em}\footerfont\scshape\color{darktext} #1}}
+\newcommand*{\footerstyle}[1]{{\fontsize{8pt}{1em}\footerfont\scshape\color{lighttext} #1}}
 \newcommand*{\sectionstyle}[1]{{\fontsize{14pt}{1em}\bodyfont\bfseries\scshape\color{text}\@sectioncolor #1}}
 \newcommand*{\subsectionstyle}[1]{{\fontsize{13pt}{1em}\bodyfont\bfseries\textcolor{text}{#1}}}
 \newcommand*{\subsubsectionstyle}[1]{{\fontsize{12pt}{1em}\bodyfont\bfseries\textcolor{text}{#1}}}

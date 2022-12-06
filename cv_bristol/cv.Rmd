@@ -1,6 +1,6 @@
 ---
 name: Gibran Hemani
-position: "Senior Research Fellow, University of Bristol"
+position: "Associate professor of statistical genetics, University of Bristol"
 phone: "+44(0)7930951876"
 www: gibranhemani.com
 email: g.hemani@bristol.ac.uk
@@ -83,7 +83,7 @@ read_csv(here("data", "awards.csv")) %>%
 
 # Teaching and related administration
 
-The teaching-research nexus has been central to my career, starting during my PhDz when I wrote and delivered a 2-day course on R programming for researchers at the Roslin Institute. Since then I have taught on topics relating to genetics, statistics and programming to undergraduates across disciplines in medicine, biology and psychology. There has been a major shift towards using genetic data in epidemiological research over the last several years and my academic background in statistical genetics has created opportunities and substantial demand for teaching in this field at the post-graduate and life-long learning levels. I am particularly proud of my record of writing and delivering courses on genetic epidemiology to participants who are under-represented in genomic data science. In line with this I am also co-leading the BMS Decolonising the Curriculum group, which is now piloting a curriculum review framework that we developed for Bristol Medical School.
+The teaching-research nexus has been central to my career, starting during my PhD when I wrote and delivered a 2-day course on R programming for researchers at the Roslin Institute. Since then I have taught on topics relating to genetics, statistics and programming to undergraduates across disciplines in medicine, biology and psychology. There has been a major shift towards using genetic data in epidemiological research over the last several years and my academic background in statistical genetics has created opportunities and substantial demand for teaching in this field at the post-graduate and life-long learning levels. I am particularly proud of my record of writing and delivering courses on genetic epidemiology to participants who are under-represented in genomic data science. In line with this I am also co-leading the BMS Decolonising the Curriculum group, which is now piloting a curriculum review framework that we developed for Bristol Medical School.
 
 ## (i) Undergraduate and taught postgraduate (past 3 years)
 
