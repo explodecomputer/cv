@@ -260,6 +260,7 @@ spubs %>%
 ```{r}
 grants <- read_csv(here::here("data", "grants.csv")) %>%
   mutate(start=as.Date(start, format=c("%d/%m/%Y")), end=as.Date(end, format=c("%d/%m/%Y"))) %>%
+  filter(awarded != "pending") %>%
   arrange(desc(start))
 
 grant_totals <- grants %>% 
