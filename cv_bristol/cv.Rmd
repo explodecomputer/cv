@@ -71,6 +71,7 @@ read_csv(here("data", "education.csv")) %>%
 
 ```{r awards}
 read_csv(here("data", "awards.csv")) %>%
+  arrange(desc(when)) %>%
   detailed_entries(
     with = what,
     what = why,
