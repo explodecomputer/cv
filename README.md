@@ -27,5 +27,21 @@ Rscript pubs.r
 render cv.Rmd
 ```
 
+## Snippets
 
+Get concise list of grants
 
+```r
+library(dplyr)
+a <- read.csv("data/grants.csv")
+a %>%     
+    mutate(
+        start=as.Date(start, format="%d/%m/%Y"),
+        end=as.Date(end, format="%d/%m/%Y")
+    ) %>%
+    arrange(desc(start)) %>%
+    mutate(    
+        s=paste0(
+    "'", title, "'. ", funder, ". ", role, ". ", amount, currency, ". ", start, " - ", end, "."
+)) %>% {.$s}
+```
