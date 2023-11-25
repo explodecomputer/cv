@@ -17,7 +17,11 @@ csl: "../resources/nature.csl"
 knitr::opts_chunk$set(echo = FALSE, 
                       warning = FALSE,
                       message = FALSE)
-source("../scripts/install.R")
+library(tidyverse)
+library(vitae)
+library(bib2df)
+library(here)
+library(glue)
 
 separate_why <- function(x)
 {
