@@ -201,7 +201,10 @@ convert_to_bib <- function(x)
     YEAR=x$year,
     NOTE=gsub("%", "\\\\%", x$info)
   ) %>% bib2df::df2bib(file=tmpfile)
-  bibliography_entries(tmpfile)
+  b <- bibliography_entries(tmpfile)
+  a <- gsub("\\\\leavevmode", "\\\\item \\\\leavevmode", readLines(tmpfile))
+  writeLines(a, tmpfile)
+  return(b)
 }
 ```
 

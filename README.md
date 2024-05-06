@@ -27,6 +27,24 @@ Rscript pubs.r
 render cv.Rmd
 ```
 
+### Troubleshooting
+
+2024-05-06: `bibliography_entries` seems to be causing an issue - https://github.com/mitchelloharawild/vitae/issues/251. To overcome this, render as normal and if it errors then run
+
+```r
+tmpfile <- "cv_bristol/cv.tex"
+a <- gsub("\\\\leavevmode", "\\\\item \\\\leavevmode", readLines(tmpfile))
+writeLines(a, tmpfile)
+```
+
+then in the cv_bristol dir
+
+```bash
+xelatex cv.tex
+```
+
+
+
 ## Snippets
 
 Get concise list of grants

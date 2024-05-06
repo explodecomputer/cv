@@ -1,4 +1,8 @@
-source("../scripts/install.R")
+library(dplyr)
+library(scholar)
+library(here)
+library(readr)
+library(stringr)
 
 scholar_id <- "6fC0BYYAAAAJ"
 pubs <- scholar::get_publications(scholar_id) %>%
