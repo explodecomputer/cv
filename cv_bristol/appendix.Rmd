@@ -1,13 +1,4 @@
 ---
-name: Gibran Hemani
-position: "Publication appendix"
-phone: "+44(0)7930951876"
-www: gibranhemani.com
-email: g.hemani@bristol.ac.uk
-github: explodecomputer
-aboutme:
-date: "`r format(Sys.time(), '%B %Y')`"
-headcolor: "000000"
 output: vitae::awesomecv
 csl: "../resources/nature.csl"
 ---
@@ -34,6 +25,23 @@ separate_why <- function(x)
 
 ```{r}
 load(here("data", "pubs.rdata"))
+
+pubs <- pubs %>% 
+  filter(year >= 2018)
+
+temp <- list(
+  pubid="temp",
+  title="The importance of family based sampling for biobanks",
+  author="NM Davies, G Hemani, JM Neiderhiser, HC Martin, MC Mills, PM Visscher, L Yengo, AS Young, MC Keller",
+  journal="Nature",
+  number="In press",
+  cites=0,
+  year=2024,
+  cid=NA
+) %>% as.data.frame()
+
+# pubs <- bind_rows(temp, pubs)
+
 convert_to_bib <- function(x)
 {
   Encoding(x$author) <- "UTF-8"
@@ -76,11 +84,7 @@ convert_to_bib <- function(x)
 }
 ```
 
-
-Full publication list based on archive at [google scholar](https://scholar.google.ca/citations?hl=en&user=6fC0BYYAAAAJ).
-
-- H-index: **`r h_index`**
-- i10-index: **`r i10_index`**
+# Publications
 
 ```{r}
 pubs %>% 

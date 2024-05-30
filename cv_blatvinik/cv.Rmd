@@ -1,0 +1,313 @@
+---
+name: Gibran Hemani
+position: "Professor of statistical genetics, University of Bristol"
+phone: "+44(0)7930951876"
+www: gibranhemani.com
+email: g.hemani@bristol.ac.uk
+github: explodecomputer
+aboutme:
+date: "`r format(Sys.time(), '%B %Y')`"
+headcolor: "000000"
+output:
+  vitae::awesomecv:
+    keep_tex: true
+csl: "../resources/nature.csl"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, 
+                      warning = FALSE,
+                      message = FALSE)
+library(tidyverse)
+library(vitae)
+library(bib2df)
+library(here)
+library(glue)
+
+separate_why <- function(x)
+{
+  x %>%
+    dplyr::mutate(why = strsplit(why, "\\. ")) %>%
+    tidyr::unnest(why)
+}
+```
+
+# Present Appointment
+
+```{r employment}
+jobs <- read_csv(here("data", "jobs.csv")) 
+
+jobs[1,] %>%
+  detailed_entries(
+    what = role,
+    when = glue("{start_date} to {end_date}"),
+    with = company,
+    where = where,
+    why = details)
+```
+
+# Previous Appointments
+
+```{r}
+jobs[-1,] %>%
+  detailed_entries(
+    what = role,
+    when = glue("{start_date} to {end_date}"),
+    with = company,
+    where = where,
+    why = details)
+```
+
+# Academic Qualifications
+
+```{r}
+read_csv(here("data", "education.csv")) %>%
+  detailed_entries(
+    when = glue("{start_date} to {end_date}"),
+    what = degree,
+    where = loc,
+    with = uni,
+    why = details
+)
+```
+
+# Special Awards, Honours and Distinctions
+
+```{r awards}
+read_csv(here("data", "awards.csv")) %>%
+  arrange(desc(when)) %>%
+  detailed_entries(
+    with = what,
+    what = why,
+    when = when,
+    where = where
+)
+```
+
+
+# Publications summary
+
+```{r}
+load(here("data", "pubs.rdata"))
+
+temp <- list(
+  pubid="temp",
+  title="The importance of family based sampling for biobanks",
+  author="NM Davies, G Hemani, JM Neiderhiser, HC Martin, MC Mills, PM Visscher, L Yengo, AS Young, MC Keller",
+  journal="Nature",
+  number="In press",
+  cites=0,
+  year=2024,
+  cid=NA
+) %>% as.data.frame()
+
+pubs <- bind_rows(temp, pubs)
+
+convert_to_bib <- function(x)
+{
+  Encoding(x$author) <- "UTF-8"
+  x$author <- iconv(x$author, "UTF-8", "UTF-8", sub="")
+  x$pubid <- gsub("-", "", x$pubid)
+  x$author <- sapply(x$author, function(string)
+  {
+    authors = trimws(unlist(strsplit(string, ",")))
+    format_author = function(author) {
+        words = trimws(unlist(strsplit(author, " ")))
+        lastname = words[length(words)]
+        first = words[!words %in% lastname]
+        first = gsub("\\B[a-z]", "", first, perl = TRUE)
+        first = paste(first, collapse = "")
+        trimws(paste(first, lastname))
+    }
+    authors = sapply(authors, format_author)
+    paste(authors, collapse = ", ")
+  })
+
+  tmpfile <- here("data", "pubs.bib")
+  tibble(
+    CATEGORY="ARTICLE",
+    BIBTEXKEY=x$pubid,
+    AUTHOR=
+      strsplit(x$author, split=", ") %>%
+      lapply(., function(i) {
+        stringr::str_split(i, " ", n=2) %>%
+        sapply(., function(j) {
+          paste(rev(j), collapse=", ")
+          }) %>%
+        gsub("al, et", "others", .)
+      }),
+    TITLE=x$title,
+    JOURNAL=x$journal,
+    NUMBER=x$number,
+    YEAR=x$year
+  ) %>% bib2df::df2bib(file=tmpfile)
+  b <- bibliography_entries(tmpfile)
+  a <- gsub("\\\\leavevmode", "\\\\item \\\\leavevmode", readLines(tmpfile))
+  writeLines(a, tmpfile)
+  return(b)
+}
+
+pubs <- pubs %>% 
+  filter(year >= 2018)
+```
+
+
+- H-index: **`r h_index`**
+- i10-index: **`r i10_index`**
+- Number of publications since indepdence (2018): **`r nrow(pubs)`**
+
+A full list of publications since independence is at the end of the document.
+
+# Research grants
+
+```{r}
+grants <- read_csv(here::here("data", "grants.csv")) %>%
+  mutate(start=as.Date(start, format=c("%d/%m/%Y")), end=as.Date(end, format=c("%d/%m/%Y"))) %>%
+  filter(awarded != "pending") %>%
+  arrange(desc(start))
+
+grant_totals <- grants %>% 
+  group_by(role) %>% 
+  summarise(n=n(), income=sum(amount * conversion), incomep = format(round(as.numeric(income), 2), nsmall=0, scientific=FALSE, big.mark=","))
+
+grant_totals_current <- grants %>% 
+  subset(., end > today()) %>%
+  group_by(role) %>% 
+  summarise(n=n(), income=sum(amount * conversion), incomep = format(round(as.numeric(income), 2), nsmall=0, scientific=FALSE, big.mark=","))
+
+
+grantsf <- grants %>% 
+  mutate(n=1:nrow(grants)) %>%
+  group_by(n) %>%
+  do({
+    x <- .
+    merge(
+      x, 
+      tibble(n=x$n[1],
+        why=paste(
+          "Amount: ", paste(format(round(as.numeric(x$amount)), nsmall=0, scientific=FALSE, big.mark=","), x$currency),
+          "; Role: ", x$role,
+          "; Dates: ", paste(x$start, "to", x$end),
+          "; Proportion: ", x$perc),
+        when=x$awarded
+      )
+    )
+  })
+```
+
+Total income as PI, from `r subset(grant_totals, role=="PI")$n` grant(s): **`r subset(grant_totals, role=="PI")$incomep` GBP**
+
+Total income as CI, from `r subset(grant_totals, role=="Co-I")$n` grant(s): **`r subset(grant_totals, role=="Co-I")$incomep` GBP**
+
+Current income as PI, from `r subset(grant_totals_current, role=="PI")$n` grant(s): **`r subset(grant_totals_current, role=="PI")$incomep` GBP**
+
+Current income as CI, from `r subset(grant_totals_current, role=="Co-I")$n` grant(s): **`r subset(grant_totals_current, role=="Co-I")$incomep` GBP**
+
+
+```{r}
+grantsf  %>%
+  detailed_entries(with=title, why=why, when=when, what=funder)
+```
+
+# Indications of external recognition
+
+## Editorships
+
+```{r}
+read_csv(here::here("data", "editorships.csv")) %>%
+  arrange(desc(when)) %>%
+  detailed_entries(what=what, when=when, with=with)
+```
+
+## Appointment to national or international bodies
+
+```{r}
+read_csv(here::here("data", "bodies.csv")) %>%
+  arrange(desc(when)) %>%
+  detailed_entries(what=what, when=when, with=with)
+```
+
+## Invitations for degree examinations
+
+```{r}
+read_csv(here::here("data", "degree_examination.csv")) %>%
+  arrange(desc(when)) %>%
+  detailed_entries(what=what, where=where, with=who, when=when)
+```
+
+## Invited lectures
+
+```{r}
+read_csv(here::here("data", "talks.csv")) %>% 
+  arrange(desc(when)) %>%
+  filter(when >= (now() %>% year() - 6)) %>%
+  arrange(desc(when)) %>%
+  detailed_entries(what=what, with=who, when=when, where=type, why=details)
+```
+
+## Related administration
+
+```{r}
+read_csv(here::here("data", "research_management.csv")) %>%
+  mutate(where = as.character(where)) %>%
+  arrange(desc(when)) %>%
+  detailed_entries(what=with, where=where, with=what, when=when, why=why)
+```
+
+# Academic leadership and citizenship
+
+```{r}
+academic_leadership <- read_csv(here::here("data", "academic_leadership.csv")) %>%
+  mutate(where = as.character(where), why = as.character(why)) %>%
+  arrange(desc(when)) %>%
+  separate_why()
+
+# academic_leadership %>%
+#   filter(type == "international") %>%
+#   arrange(desc(when)) %>%
+#   detailed_entries(what=as.character(what), where=where, with=with, when=when, why=why)
+```
+
+## Academic leadership in the University
+
+```{r}
+academic_leadership %>%
+  filter(type == "university") %>%
+  arrange(desc(when)) %>%
+  detailed_entries(what=as.character(what), where=where, with=with, when=when, why=why)
+```
+
+## Professional activities outside the University
+
+```{r}
+academic_misc <- read_csv(here::here("data", "academic_misc.csv")) %>%
+  arrange(desc(when))
+
+academic_misc %>%
+  filter(type=="professional") %>%
+  brief_entries(what=what, when=when)
+```
+
+## Contributions to society
+
+```{r}
+academic_misc %>%
+  filter(type=="society") %>%
+  brief_entries(what=what, when=when)
+```
+
+## Entrepreneurship, enterprise and partnerships
+
+```{r}
+academic_misc %>%
+  filter(type=="entrepreneurship") %>%
+  brief_entries(what=what, when=when)
+```
+
+## Good citizenship
+
+```{r}
+academic_misc %>%
+  filter(type=="citizenship") %>%
+  brief_entries(what=what, when=when)
+```
